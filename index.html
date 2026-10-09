@@ -12,17 +12,16 @@
 
   <style>
     :root {
-      --bg-dark: #120507;
-      --bg-gradient-center: #280C11;
-      --card-cream: #F5F0E6;
-      --crimson-primary: #82262B;
-      --crimson-deep: #4D1216;
-      --rose-muted: #B8656A;
-      --gold-antique: #C59E52;
-      --gold-deep: #8C6A28;
-      --gold-light: #E5CA8C;
-      --text-dark: #2B1D1E;
-      --text-muted: #736062;
+      --bg-dark: #130608;
+      --bg-wine-grad: #290e13;
+      --card-fallback: #f5f0e6;
+      --wine-primary: #82262b;
+      --wine-deep: #4a1115;
+      --gold-antique: #c59e52;
+      --gold-deep: #8f6e2e;
+      --gold-light: #e4c98b;
+      --text-dark: #2b1a1c;
+      --text-muted: #6b5558;
     }
 
     * {
@@ -34,7 +33,7 @@
     html, body {
       width: 100%;
       min-height: 100vh;
-      background: radial-gradient(circle at 50% 30%, var(--bg-gradient-center) 0%, var(--bg-dark) 85%);
+      background: radial-gradient(circle at 50% 30%, var(--bg-wine-grad) 0%, var(--bg-dark) 85%);
       background-attachment: fixed;
       font-family: 'Cormorant Garamond', serif;
       color: var(--text-dark);
@@ -42,10 +41,13 @@
       scroll-behavior: smooth;
     }
 
+    /* ==========================================
+       1. INTRO VIDEO OVERLAY
+       ========================================== */
     #intro-overlay {
       position: fixed;
       inset: 0;
-      background-color: #0d0405;
+      background-color: #000;
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -63,7 +65,7 @@
     #intro-video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Prevents video cropping */
     }
 
     .overlay-controls {
@@ -77,7 +79,7 @@
     }
 
     .btn-enter {
-      color: #FAF6F0;
+      color: #fff;
       font-size: 0.8rem;
       letter-spacing: 3px;
       background: rgba(130, 38, 43, 0.9);
@@ -94,9 +96,12 @@
 
     .btn-enter:hover {
       background: var(--gold-antique);
-      color: var(--crimson-deep);
+      color: var(--wine-deep);
     }
 
+    /* ==========================================
+       2. CARDS CONTAINER LAYOUT
+       ========================================== */
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -107,26 +112,28 @@
       padding: 80px 15px;
     }
 
-    /* Physical Stationery Card Container using user's paper texture */
+    /* Physical Stationery Card Container */
     .wedding-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 440px;
       min-height: 700px;
-      background-color: var(--card-cream);
+      
+      /* Card Texture Background */
+      background-color: var(--card-fallback);
       background-image: url('paper_texture.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-
+      
       border-radius: 4px;
 
       box-shadow: 
         0 25px 50px rgba(0, 0, 0, 0.65),
         0 8px 16px rgba(0, 0, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8),
-        0 0 0 12px rgba(130, 38, 43, 0.15);
+        0 0 20px rgba(130, 38, 43, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 
       display: flex;
       flex-direction: column;
@@ -135,7 +142,7 @@
       padding: 2.8rem 2.2rem;
       text-align: center;
 
-      /* Depth Focus Transitions */
+      /* Soft Depth-Blur Focus Transitions */
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                   opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                   filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -148,7 +155,7 @@
     }
 
     .wedding-card.out-of-focus {
-      opacity: 0.45;
+      opacity: 0.4;
       filter: blur(3px);
       transform: scale(0.96);
     }
@@ -167,13 +174,9 @@
       border: 1px solid rgba(197, 158, 82, 0.35);
     }
 
-    .card-border::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border: 1px solid rgba(130, 38, 43, 0.2);
-    }
-
+    /* ==========================================
+       3. ANTIQUE JHAROKHA CREST & TYPOGRAPHY
+       ========================================== */
     .jharokha-crest-container {
       width: 100px;
       height: 115px;
@@ -190,7 +193,7 @@
       font-family: 'Cinzel', serif;
       font-size: 0.85rem;
       letter-spacing: 4px;
-      color: var(--crimson-primary);
+      color: var(--gold-antique);
       margin-bottom: 5px;
     }
 
@@ -205,10 +208,10 @@
     .names-title {
       font-family: 'Great Vibes', cursive;
       font-size: 4rem;
-      color: var(--crimson-primary);
+      color: var(--wine-primary);
       line-height: 1.05;
       font-weight: 400;
-      text-shadow: 0 1px 2px rgba(130, 38, 43, 0.1);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
     }
 
     .ampersand {
@@ -223,13 +226,12 @@
       font-family: 'Cinzel', serif;
       font-size: 0.88rem;
       letter-spacing: 3px;
-      color: var(--crimson-primary);
+      color: var(--wine-primary);
       border-top: 1px solid var(--gold-antique);
       border-bottom: 1px solid var(--gold-antique);
       padding: 8px 24px;
       margin: 12px 0;
       text-transform: uppercase;
-      background: rgba(197, 158, 82, 0.08);
     }
 
     .location-text {
@@ -248,6 +250,9 @@
       text-transform: uppercase;
     }
 
+    /* ==========================================
+       4. ITINERARY SPINE & MOVING PEARL
+       ========================================== */
     .itinerary-track {
       position: relative;
       width: 100%;
@@ -278,12 +283,12 @@
       left: 18px;
       top: 20px;
       transform: translate(-50%, -50%);
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f4e8d2 55%, var(--gold-antique) 100%);
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f3e9d7 60%, var(--gold-antique) 100%);
       box-shadow: 
-        0 0 8px rgba(197, 158, 82, 0.6),
+        0 0 6px rgba(197, 158, 82, 0.6),
         0 0 2px rgba(0, 0, 0, 0.4);
       z-index: 5;
       transition: top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
@@ -300,9 +305,9 @@
     }
 
     @keyframes pearlPulse {
-      0% { transform: scale(0.9); opacity: 0.8; }
-      50% { transform: scale(1.3); opacity: 0.2; }
-      100% { transform: scale(0.9); opacity: 0.8; }
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.25); opacity: 0.2; }
+      100% { transform: scale(0.9); opacity: 0.7; }
     }
 
     .event-item {
@@ -312,7 +317,7 @@
       align-items: flex-start;
       text-align: left;
       cursor: pointer;
-      opacity: 0.38;
+      opacity: 0.35;
       filter: blur(1.5px);
       transform: scale(0.96);
       transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
@@ -329,11 +334,10 @@
       left: -36px;
       top: 8px;
       transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background-color: var(--crimson-primary);
-      box-shadow: 0 0 0 2px rgba(197, 158, 82, 0.4);
+      background-color: var(--gold-antique);
       z-index: 3;
     }
 
@@ -341,7 +345,7 @@
       font-family: 'Cinzel', serif;
       font-size: 0.98rem;
       letter-spacing: 1.5px;
-      color: var(--crimson-primary);
+      color: var(--wine-primary);
       font-weight: 600;
       text-transform: uppercase;
     }
@@ -369,7 +373,7 @@
     .location-link {
       display: inline-block;
       font-size: 0.82rem;
-      color: var(--crimson-primary);
+      color: var(--wine-primary);
       text-decoration: none;
       margin-top: 3px;
       font-family: 'Marcellus', serif;
@@ -383,10 +387,10 @@
     }
 
     .btn-action {
-      background: var(--crimson-primary);
-      color: #FFF8F0;
+      background: var(--wine-primary);
+      color: #fff;
       border: 1px solid var(--gold-antique);
-      padding: 11px 24px;
+      padding: 10px 24px;
       font-family: 'Marcellus', serif;
       font-size: 0.75rem;
       letter-spacing: 2px;
@@ -396,18 +400,17 @@
       text-decoration: none;
       display: inline-block;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(130, 38, 43, 0.25);
     }
 
     .btn-action:hover {
       background: var(--gold-antique);
-      color: var(--crimson-deep);
-      border-color: var(--crimson-primary);
+      color: var(--wine-deep);
     }
   </style>
 </head>
 <body>
 
+  <!-- 1. INTRO VIDEO OVERLAY -->
   <div id="intro-overlay">
     <video id="intro-video" playsinline autoplay muted>
       <source src="wedding_intro.mp4" type="video/mp4">
@@ -417,24 +420,21 @@
     </div>
   </div>
 
+  <!-- 2. MAIN CARDS CONTAINER -->
   <div class="cards-wrapper">
 
     <!-- CARD 1: HERO -->
     <div class="wedding-card in-focus">
       <div class="card-border"></div>
 
-      <!-- ANTIQUE MATTE JHAROKHA CREST -->
+      <!-- ANTIQUE GOLD JHAROKHA CREST -->
       <div class="jharokha-crest-container">
         <svg class="jharokha-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="antiqueGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#8C6A28" />
-              <stop offset="45%" stop-color="#E5CA8C" />
-              <stop offset="100%" stop-color="#C59E52" />
-            </linearGradient>
-            <linearGradient id="crimsonGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#82262B" />
-              <stop offset="100%" stop-color="#C59E52" />
+              <stop offset="0%" stop-color="#8f6e2e" />
+              <stop offset="50%" stop-color="#e4c98b" />
+              <stop offset="100%" stop-color="#c59e52" />
             </linearGradient>
           </defs>
 
@@ -457,7 +457,7 @@
           <path d="M50 104 L50 110 M48 110 C48 113 50 115 50 115 C50 115 52 113 52 110 Z" stroke="url(#antiqueGoldGrad)" stroke-width="1" fill="url(#antiqueGoldGrad)" />
 
           <!-- Monogram S & S -->
-          <text x="50" y="69" font-family="'Cinzel', serif" font-size="12.5" font-weight="600" fill="url(#crimsonGoldGrad)" text-anchor="middle" letter-spacing="1.5">S&amp;S</text>
+          <text x="50" y="69" font-family="'Cinzel', serif" font-size="12.5" font-weight="600" fill="url(#antiqueGoldGrad)" text-anchor="middle" letter-spacing="1.5">S&amp;S</text>
         </svg>
       </div>
 
@@ -557,7 +557,7 @@
 
         <div class="event-item" data-index="3">
           <div class="event-dot"></div>
-          <div class="event-name" style="color: var(--crimson-primary);">Vivah (Pheras)</div>
+          <div class="event-name" style="color: var(--gold-deep);">Vivah (Pheras)</div>
           <div class="event-details-box">
             <div class="event-datetime">Thursday • Late Night</div>
             <a href="https://maps.google.com/?q=Amoravida+Khandala" target="_blank" class="location-link">Amoravida, Khandala ↗</a>
@@ -575,7 +575,7 @@
       <div class="card-border"></div>
       <div class="crest-symbol">BLESSINGS</div>
 
-      <p style="font-size: 1.15rem; color: var(--crimson-primary); line-height: 1.6; font-style: italic; padding: 0 10px;">
+      <p style="font-size: 1.15rem; color: var(--wine-primary); line-height: 1.6; font-style: italic; padding: 0 10px;">
         "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
       </p>
 
@@ -583,19 +583,19 @@
 
       <div>
         <span class="sub-heading">Bride's Parents</span>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--crimson-primary); margin-top: 4px; font-weight: 600;">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--wine-primary); margin-top: 4px; font-weight: 600;">
           Sangita & Sunil Kumar Shukla
         </h3>
       </div>
 
       <div>
         <span class="sub-heading">Groom's Parents</span>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--crimson-primary); margin-top: 4px; font-weight: 600;">
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--wine-primary); margin-top: 4px; font-weight: 600;">
           Sadhana & Om Prakash Sharma
         </h3>
       </div>
 
-      <div class="names-title" style="font-size: 2.8rem; margin-top: 10px; color: var(--crimson-primary);">
+      <div class="names-title" style="font-size: 2.8rem; margin-top: 10px; color: var(--wine-primary);">
         With Warm Regards
       </div>
     </div>
