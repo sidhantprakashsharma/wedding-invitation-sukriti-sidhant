@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation | Sukriti & Sidhant</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #120507;
+      --bg-gradient-center: #280C11;
+      --card-cream: #F5F0E6;
+      --crimson-primary: #82262B;
+      --crimson-deep: #4D1216;
+      --rose-muted: #B8656A;
+      --gold-antique: #C59E52;
+      --gold-deep: #8C6A28;
+      --gold-light: #E5CA8C;
+      --text-dark: #2B1D1E;
+      --text-muted: #736062;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 30%, var(--bg-gradient-center) 0%, var(--bg-dark) 85%);
+      background-attachment: fixed;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: #0d0405;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #intro-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    #intro-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay-controls {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 10000;
+    }
+
+    .btn-enter {
+      color: #FAF6F0;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      background: rgba(130, 38, 43, 0.9);
+      border: 1px solid var(--gold-antique);
+      padding: 12px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      text-transform: uppercase;
+      font-family: 'Marcellus', serif;
+      transition: all 0.3s ease;
+    }
+
+    .btn-enter:hover {
+      background: var(--gold-antique);
+      color: var(--crimson-deep);
+    }
+
+    .cards-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      padding: 80px 15px;
+    }
+
+    /* Physical Stationery Card Container using user's paper texture */
+    .wedding-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+      min-height: 700px;
+      background-color: var(--card-cream);
+      background-image: url('paper_texture.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      border-radius: 4px;
+
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.65),
+        0 8px 16px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+        0 0 0 12px rgba(130, 38, 43, 0.15);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2.8rem 2.2rem;
+      text-align: center;
+
+      /* Depth Focus Transitions */
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wedding-card.in-focus {
+      opacity: 1;
+      filter: blur(0px);
+      transform: scale(1);
+    }
+
+    .wedding-card.out-of-focus {
+      opacity: 0.45;
+      filter: blur(3px);
+      transform: scale(0.96);
+    }
+
+    .card-border {
+      position: absolute;
+      inset: 14px;
+      border: 1px solid var(--gold-antique);
+      pointer-events: none;
+    }
+
+    .card-border::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(197, 158, 82, 0.35);
+    }
+
+    .card-border::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 1px solid rgba(130, 38, 43, 0.2);
+    }
+
+    .jharokha-crest-container {
+      width: 100px;
+      height: 115px;
+      margin-bottom: 2px;
+      opacity: 0.95;
+    }
+
+    .jharokha-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .crest-symbol {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--crimson-primary);
+      margin-bottom: 5px;
+    }
+
+    .sub-heading {
+      font-family: 'Marcellus', serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+    }
+
+    .names-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: var(--crimson-primary);
+      line-height: 1.05;
+      font-weight: 400;
+      text-shadow: 0 1px 2px rgba(130, 38, 43, 0.1);
+    }
+
+    .ampersand {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--gold-antique);
+      margin: 2px 0;
+    }
+
+    .date-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      color: var(--crimson-primary);
+      border-top: 1px solid var(--gold-antique);
+      border-bottom: 1px solid var(--gold-antique);
+      padding: 8px 24px;
+      margin: 12px 0;
+      text-transform: uppercase;
+      background: rgba(197, 158, 82, 0.08);
+    }
+
+    .location-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'Marcellus', serif;
+    }
+
+    .monogram-stamp {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 5px;
+      color: var(--gold-antique);
+      text-transform: uppercase;
+    }
+
+    .itinerary-track {
+      position: relative;
+      width: 100%;
+      margin: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding-left: 54px;
+    }
+
+    .vertical-spine {
+      position: absolute;
+      left: 18px;
+      top: 15px;
+      bottom: 15px;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--gold-antique) 10%,
+        var(--gold-antique) 90%,
+        transparent
+      );
+    }
+
+    .pearl-node {
+      position: absolute;
+      left: 18px;
+      top: 20px;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f4e8d2 55%, var(--gold-antique) 100%);
+      box-shadow: 
+        0 0 8px rgba(197, 158, 82, 0.6),
+        0 0 2px rgba(0, 0, 0, 0.4);
+      z-index: 5;
+      transition: top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .pearl-node::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-light);
+      opacity: 0.6;
+      animation: pearlPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pearlPulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 0.2; }
+      100% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .event-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      cursor: pointer;
+      opacity: 0.38;
+      filter: blur(1.5px);
+      transform: scale(0.96);
+      transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+    }
+
+    .event-item.active {
+      opacity: 1;
+      filter: blur(0px);
+      transform: scale(1.04);
+    }
+
+    .event-dot {
+      position: absolute;
+      left: -36px;
+      top: 8px;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--crimson-primary);
+      box-shadow: 0 0 0 2px rgba(197, 158, 82, 0.4);
+      z-index: 3;
+    }
+
+    .event-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      letter-spacing: 1.5px;
+      color: var(--crimson-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .event-details-box {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+    }
+
+    .event-item.active .event-details-box {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 4px;
+    }
+
+    .event-datetime {
+      font-family: 'Marcellus', serif;
+      font-size: 0.82rem;
+      color: var(--gold-deep);
+      letter-spacing: 1px;
+    }
+
+    .location-link {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: var(--crimson-primary);
+      text-decoration: none;
+      margin-top: 3px;
+      font-family: 'Marcellus', serif;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+    }
+
+    .location-link:hover {
+      color: var(--gold-deep);
+      text-decoration: underline;
+    }
+
+    .btn-action {
+      background: var(--crimson-primary);
+      color: #FFF8F0;
+      border: 1px solid var(--gold-antique);
+      padding: 11px 24px;
+      font-family: 'Marcellus', serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(130, 38, 43, 0.25);
+    }
+
+    .btn-action:hover {
+      background: var(--gold-antique);
+      color: var(--crimson-deep);
+      border-color: var(--crimson-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="intro-overlay">
+    <video id="intro-video" playsinline autoplay muted>
+      <source src="wedding_intro.mp4" type="video/mp4">
+    </video>
+    <div class="overlay-controls">
+      <button class="btn-enter" onclick="closeIntro()">Enter Invitation</button>
+    </div>
+  </div>
+
+  <div class="cards-wrapper">
+
+    <!-- CARD 1: HERO -->
+    <div class="wedding-card in-focus">
+      <div class="card-border"></div>
+
+      <!-- ANTIQUE MATTE JHAROKHA CREST -->
+      <div class="jharokha-crest-container">
+        <svg class="jharokha-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="antiqueGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8C6A28" />
+              <stop offset="45%" stop-color="#E5CA8C" />
+              <stop offset="100%" stop-color="#C59E52" />
+            </linearGradient>
+            <linearGradient id="crimsonGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#82262B" />
+              <stop offset="100%" stop-color="#C59E52" />
+            </linearGradient>
+          </defs>
+
+          <!-- Lotus Crown Peak -->
+          <path d="M50 8 C48 13 43 16 43 20 C43 23 46 24 50 21 C54 24 57 23 57 20 C57 16 52 13 50 8 Z" fill="url(#antiqueGoldGrad)" />
+
+          <!-- Outer Jharokha Arch -->
+          <path d="M16 104 L16 52 C16 33 30 23 50 23 C70 23 84 33 84 52 L84 104" stroke="url(#antiqueGoldGrad)" stroke-width="1.2" fill="none" />
+          
+          <!-- Inner Cusped Scalloped Arch -->
+          <path d="M22 104 L22 56 C22 46 28 41 33 43 C38 45 42 39 50 37 C58 39 62 45 67 43 C72 41 78 46 78 56 L78 104" stroke="url(#antiqueGoldGrad)" stroke-width="1" fill="none" />
+
+          <!-- Delicate Lattice Lines -->
+          <line x1="16" y1="30" x2="84" y2="30" stroke="url(#antiqueGoldGrad)" stroke-width="0.8" />
+          <circle cx="50" cy="28" r="1.5" fill="url(#antiqueGoldGrad)" />
+          <circle cx="38" cy="30.5" r="1" fill="url(#antiqueGoldGrad)" />
+          <circle cx="62" cy="30.5" r="1" fill="url(#antiqueGoldGrad)" />
+
+          <!-- Base Pendant -->
+          <path d="M50 104 L50 110 M48 110 C48 113 50 115 50 115 C50 115 52 113 52 110 Z" stroke="url(#antiqueGoldGrad)" stroke-width="1" fill="url(#antiqueGoldGrad)" />
+
+          <!-- Monogram S & S -->
+          <text x="50" y="69" font-family="'Cinzel', serif" font-size="12.5" font-weight="600" fill="url(#crimsonGoldGrad)" text-anchor="middle" letter-spacing="1.5">S&amp;S</text>
+        </svg>
+      </div>
+
+      <span class="sub-heading">Together with their families</span>
+
+      <div style="margin: 6px 0;">
+        <h1 class="names-title">Sukriti</h1>
+        <div class="ampersand">&</div>
+        <h1 class="names-title">Sidhant</h1>
+      </div>
+
+      <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
+        request the honor of your presence to celebrate their wedding
+      </p>
+
+      <div class="date-badge">
+        December 02 & 03, 2026
+      </div>
+
+      <div class="location-text">
+        Lonavala & Khandala
+      </div>
+
+      <div class="monogram-stamp">— S & S —</div>
+    </div>
+
+    <!-- CARD 2: PROGRAM - DAY I -->
+    <div class="wedding-card out-of-focus" id="cardDay1">
+      <div class="card-border"></div>
+      <div class="crest-symbol">PROGRAM • DAY I</div>
+      <span class="sub-heading">Wednesday, December 02, 2026</span>
+
+      <div class="itinerary-track">
+        <div class="vertical-spine"></div>
+        <div class="pearl-node" id="pearlDay1"></div>
+
+        <div class="event-item active" data-index="0">
+          <div class="event-dot"></div>
+          <div class="event-name">Ganesh Poojan</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Wednesday • 1:00 PM</div>
+            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+          </div>
+        </div>
+
+        <div class="event-item" data-index="1">
+          <div class="event-dot"></div>
+          <div class="event-name">Mandap</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Wednesday • 2:00 PM</div>
+            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sukriti+%26+Sidhant+Wedding+Day+1&dates=20261202T073000Z/20261202T180000Z&details=Ganesh+Poojan+%26+Mandap+at+Hotel+Sapphire+Lonavala" target="_blank" class="btn-action">
+        Save Day 1 To Calendar
+      </a>
+    </div>
+
+    <!-- CARD 3: PROGRAM - DAY II -->
+    <div class="wedding-card out-of-focus" id="cardDay2">
+      <div class="card-border"></div>
+      <div class="crest-symbol">PROGRAM • DAY II</div>
+      <span class="sub-heading">Thursday, December 03, 2026</span>
+
+      <div class="itinerary-track">
+        <div class="vertical-spine"></div>
+        <div class="pearl-node" id="pearlDay2"></div>
+
+        <div class="event-item active" data-index="0">
+          <div class="event-dot"></div>
+          <div class="event-name">Mamera</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Thursday • 11:00 AM</div>
+            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+          </div>
+        </div>
+
+        <div class="event-item" data-index="1">
+          <div class="event-dot"></div>
+          <div class="event-name">Barat</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Thursday • 5:00 PM</div>
+            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+          </div>
+        </div>
+
+        <div class="event-item" data-index="2">
+          <div class="event-dot"></div>
+          <div class="event-name">Dinner</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Thursday • 9:00 PM</div>
+            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+          </div>
+        </div>
+
+        <div class="event-item" data-index="3">
+          <div class="event-dot"></div>
+          <div class="event-name" style="color: var(--crimson-primary);">Vivah (Pheras)</div>
+          <div class="event-details-box">
+            <div class="event-datetime">Thursday • Late Night</div>
+            <a href="https://maps.google.com/?q=Amoravida+Khandala" target="_blank" class="location-link">Amoravida, Khandala ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sukriti+%26+Sidhant+Wedding+Day+2&dates=20261203T053000Z/20261204T020000Z&details=Mamera%2C+Barat%2C+Dinner+%26+Vivah+at+Hotel+Sapphire+%26+Amoravida" target="_blank" class="btn-action">
+        Save Day 2 To Calendar
+      </a>
+    </div>
+
+    <!-- CARD 4: BLESSINGS -->
+    <div class="wedding-card out-of-focus">
+      <div class="card-border"></div>
+      <div class="crest-symbol">BLESSINGS</div>
+
+      <p style="font-size: 1.15rem; color: var(--crimson-primary); line-height: 1.6; font-style: italic; padding: 0 10px;">
+        "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
+      </p>
+
+      <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 5px 0;"></div>
+
+      <div>
+        <span class="sub-heading">Bride's Parents</span>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--crimson-primary); margin-top: 4px; font-weight: 600;">
+          Sangita & Sunil Kumar Shukla
+        </h3>
+      </div>
+
+      <div>
+        <span class="sub-heading">Groom's Parents</span>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--crimson-primary); margin-top: 4px; font-weight: 600;">
+          Sadhana & Om Prakash Sharma
+        </h3>
+      </div>
+
+      <div class="names-title" style="font-size: 2.8rem; margin-top: 10px; color: var(--crimson-primary);">
+        With Warm Regards
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // 1. INTRO OVERLAY LOGIC
+    const overlay = document.getElementById('intro-overlay');
+    const video = document.getElementById('intro-video');
+
+    function closeIntro() {
+      if (overlay) overlay.classList.add('hidden');
+      if (video) video.pause();
+    }
+
+    document.addEventListener('click', function() {
+      if (video && video.paused) {
+        video.play().catch(e => console.log('Autoplay prevented:', e));
+      }
+      if (video) video.muted = false;
+    }, { once: true });
+
+    if (video) {
+      video.addEventListener('ended', closeIntro);
+      video.addEventListener('error', closeIntro);
+    }
+
+    setTimeout(() => {
+      if (overlay && !overlay.classList.contains('hidden') && video && video.paused) {
+        closeIntro();
+      }
+    }, 6000);
+
+    // 2. SOFT DEPTH-BLUR SCROLL OBSERVER
+    const cards = document.querySelectorAll('.wedding-card');
+    
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-focus');
+          entry.target.classList.remove('out-of-focus');
+        } else {
+          entry.target.classList.remove('in-focus');
+          entry.target.classList.add('out-of-focus');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    // 3. DYNAMIC PEARL & EVENT FOCUS CONTROLLER
+    function setupItineraryCard(cardId, pearlId) {
+      const card = document.getElementById(cardId);
+      const pearl = document.getElementById(pearlId);
+      if (!card || !pearl) return;
+
+      const items = card.querySelectorAll('.event-item');
+
+      function syncPearlOnScroll() {
+        const viewportCenter = window.innerHeight / 2;
+        let closestIndex = 0;
+        let minDistance = Infinity;
+
+        items.forEach((item, index) => {
+          const rect = item.getBoundingClientRect();
+          const itemCenter = rect.top + rect.height / 2;
+          const distance = Math.abs(viewportCenter - itemCenter);
+
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        items.forEach((item, index) => {
+          if (index === closestIndex) {
+            item.classList.add('active');
+            const targetDot = item.querySelector('.event-dot');
+            if (targetDot) {
+              const trackRect = card.querySelector('.itinerary-track').getBoundingClientRect();
+              const dotRect = targetDot.getBoundingClientRect();
+              const relativeTop = (dotRect.top + dotRect.height / 2) - trackRect.top;
+              pearl.style.top = `${relativeTop}px`;
+            }
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', syncPearlOnScroll, { passive: true });
+      window.addEventListener('resize', syncPearlOnScroll);
+      
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      syncPearlOnScroll();
+    }
+
+    setupItineraryCard('cardDay1', 'pearlDay1');
+    setupItineraryCard('cardDay2', 'pearlDay2');
+  </script>
+</body>
+</html>
