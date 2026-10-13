@@ -41,11 +41,11 @@
       scroll-behavior: smooth;
     }
 
-    /* Video intro overlay */
+    /* Intro Overlay & Cover Screen */
     #intro-overlay {
       position: fixed;
       inset: 0;
-      background-color: #000;
+      background-color: #0b0204;
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -60,20 +60,49 @@
       pointer-events: none;
     }
 
-    #intro-video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .overlay-controls {
-      position: absolute;
-      bottom: 40px;
+    .cover-screen {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      z-index: 10000;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: 30px;
+      text-align: center;
+      background: radial-gradient(circle at center, #290e13 0%, #130608 90%);
+    }
+
+    .cover-subtitle {
+      font-family: 'Marcellus', serif;
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--gold-antique);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .cover-amp {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold-antique);
+      font-size: 1.4rem;
+      margin: 4px 0;
+    }
+
+    .cover-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #d4c3a3;
+      margin-bottom: 35px;
     }
 
     .btn-enter {
@@ -82,11 +111,10 @@
       letter-spacing: 3px;
       background: rgba(130, 38, 43, 0.9);
       border: 1px solid var(--gold-antique);
-      padding: 12px 30px;
+      padding: 14px 34px;
       border-radius: 30px;
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      backdrop-filter: blur(5px);
       text-transform: uppercase;
       font-family: 'Marcellus', serif;
       transition: all 0.3s ease;
@@ -95,9 +123,47 @@
     .btn-enter:hover {
       background: var(--gold-antique);
       color: var(--wine-deep);
+      transform: scale(1.03);
     }
 
-    /* Card Layout & Frame Safe Padding */
+    #video-wrapper {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: #000;
+    }
+
+    #intro-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .btn-skip {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border: 1px solid var(--gold-antique);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-family: 'Marcellus', serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      z-index: 10001;
+      backdrop-filter: blur(4px);
+      transition: background 0.3s ease;
+    }
+
+    .btn-skip:hover {
+      background: var(--gold-antique);
+      color: var(--wine-deep);
+    }
+
+    /* Cards Layout & Frame Safe Padding */
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -323,19 +389,31 @@
   </style>
 </head>
 <body>
+  <!-- INTRO OVERLAY WITH TAP-TO-VIEW COVER SCREEN -->
   <div id="intro-overlay">
-    <video id="intro-video" playsinline autoplay muted>
-      <source src="wedding_intro.mp4" type="video/mp4">
-    </video>
-    <div class="overlay-controls">
-      <button class="btn-enter" onclick="closeIntro()">Enter Invitation</button>
+    <!-- Cover Screen State -->
+    <div id="cover-screen" class="cover-screen">
+      <div class="cover-subtitle">Wedding Invitation</div>
+      <h1 class="cover-title">Sukriti</h1>
+      <div class="cover-amp">&amp;</div>
+      <h1 class="cover-title">Sidhant</h1>
+      <p class="cover-desc">Tap below to view our special invitation</p>
+      <button class="btn-enter" onclick="startVideoExperience()">Tap to View Invitation</button>
+    </div>
+
+    <!-- Video Player State (Hidden Initially) -->
+    <div id="video-wrapper">
+      <button class="btn-skip" onclick="closeIntro()">Skip Intro</button>
+      <video id="intro-video" playsinline>
+        <source src="wedding_intro.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
   <div class="cards-wrapper">
     <!-- HERO CARD -->
     <div class="wedding-card in-focus">
-      <div></div> <!-- Spacer for balance -->
+      <div></div>
       <div>
         <span class="sub-heading">Together with their families</span>
         <div style="margin: 12px 0;">
@@ -418,30 +496,28 @@
 
   <script>
     const overlay = document.getElementById('intro-overlay');
+    const coverScreen = document.getElementById('cover-screen');
+    const videoWrapper = document.getElementById('video-wrapper');
     const video = document.getElementById('intro-video');
+
+    function startVideoExperience() {
+      if (coverScreen) coverScreen.style.display = 'none';
+      if (videoWrapper) videoWrapper.style.display = 'block';
+      if (video) {
+        video.muted = false;
+        video.play().catch(e => console.log('Playback error:', e));
+      }
+    }
 
     function closeIntro() {
       if (overlay) overlay.classList.add('hidden');
       if (video) video.pause();
     }
 
-    document.addEventListener('click', function() {
-      if (video && video.paused) {
-        video.play().catch(e => console.log('Autoplay prevented:', e));
-      }
-      if (video) video.muted = false;
-    }, { once: true });
-
     if (video) {
       video.addEventListener('ended', closeIntro);
       video.addEventListener('error', closeIntro);
     }
-
-    setTimeout(() => {
-      if (overlay && !overlay.classList.contains('hidden') && video && video.paused) {
-        closeIntro();
-      }
-    }, 6000);
 
     /* Scroll Observer for Card Focus Effect */
     const cards = document.querySelectorAll('.wedding-card');
