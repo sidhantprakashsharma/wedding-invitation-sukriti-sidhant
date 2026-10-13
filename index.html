@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Invitation | Sukriti & Sidhant</title>
+  <title>Wedding Invitation | Sukriti &amp; Sidhant</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #130608;
-      --bg-wine-grad: #290e13;
-      --card-fallback: #f5f0e6;
-      --wine-primary: #82262b;
-      --wine-deep: #4a1115;
-      --gold-antique: #c59e52;
-      --gold-deep: #8f6e2e;
-      --gold-light: #e4c98b;
-      --text-dark: #2b1a1c;
-      --text-muted: #6b5558;
+      --bg-dark: #0f0406;
+      --bg-wine-grad: #240a0e;
+      --card-fallback: #f7f2e8;
+      --wine-primary: #7a1d22;
+      --wine-dark: #420f12;
+      --gold-antique: #b88e3d;
+      --gold-deep: #785a20;
+      --gold-darker: #594215;
+      --gold-light: #e0c58a;
+      --text-dark: #241315;
+      --text-muted: #5e484b;
+      --stamp-dark: #3b0d10; /* Darker shade for S & S footer monograms */
     }
 
     * {
@@ -41,13 +43,14 @@
       scroll-behavior: smooth;
     }
 
+    /* Falling Petals Canvas Overlay */
     #petals-canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      pointer-events: none; /* Let clicks pass through to cards and buttons */
+      pointer-events: none;
       z-index: 10;
     }
 
@@ -78,7 +81,7 @@
       height: 100%;
       padding: 30px;
       text-align: center;
-      background: radial-gradient(circle at center, #290e13 0%, #130608 90%);
+      background: radial-gradient(circle at center, #290e13 0%, #0f0406 90%);
     }
 
     .cover-subtitle {
@@ -92,10 +95,10 @@
 
     .cover-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 4rem;
+      font-size: 3.8rem;
       color: #fff;
       line-height: 1.1;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .cover-amp {
@@ -103,7 +106,7 @@
       font-style: italic;
       color: var(--gold-antique);
       font-size: 1.4rem;
-      margin: 4px 0;
+      margin: 2px 0;
     }
 
     .cover-desc {
@@ -118,12 +121,12 @@
       color: #fff;
       font-size: 0.8rem;
       letter-spacing: 3px;
-      background: rgba(130, 38, 43, 0.9);
+      background: rgba(122, 29, 34, 0.95);
       border: 1px solid var(--gold-antique);
       padding: 14px 34px;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
       text-transform: uppercase;
       font-family: 'Marcellus', serif;
       transition: all 0.3s ease;
@@ -131,7 +134,7 @@
 
     .btn-cover-start:hover {
       background: var(--gold-antique);
-      color: var(--wine-deep);
+      color: var(--wine-dark);
       transform: scale(1.03);
     }
 
@@ -151,12 +154,12 @@
 
     .btn-skip {
       position: absolute;
-      top: 30px;
-      right: 30px;
-      background: rgba(0, 0, 0, 0.6);
+      top: 25px;
+      right: 25px;
+      background: rgba(0, 0, 0, 0.65);
       color: #fff;
       border: 1px solid var(--gold-antique);
-      padding: 8px 20px;
+      padding: 8px 18px;
       border-radius: 20px;
       font-family: 'Marcellus', serif;
       font-size: 0.75rem;
@@ -169,7 +172,7 @@
 
     .btn-skip:hover {
       background: var(--gold-antique);
-      color: var(--wine-deep);
+      color: var(--wine-dark);
     }
 
     .cards-wrapper {
@@ -178,8 +181,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 80px;
-      padding: 80px 15px;
+      gap: 70px;
+      padding: 60px 15px;
     }
 
     .wedding-card {
@@ -187,17 +190,18 @@
       z-index: 2;
       width: 100%;
       max-width: 440px;
-      min-height: 760px;
+      height: 700px;
+      max-height: 90vh;
       background-color: var(--card-fallback);
       background-image: url('card_background.jpg');
-      background-size: cover;
+      background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
       border-radius: 4px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), 0 8px 16px rgba(0, 0, 0, 0.35), 0 0 20px rgba(130, 38, 43, 0.15);
-      
-      /* STRICT UNIFORM PADDING ACROSS ALL CARDS */
-      padding: 130px 50px 140px 50px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 15px rgba(122, 29, 34, 0.2);
+
+      /* STRICT UNIFORM PADDING (130px Top, 45px Right, 140px Bottom, 45px Left) */
+      padding: 130px 45px 140px 45px;
 
       display: flex;
       flex-direction: column;
@@ -214,78 +218,78 @@
     }
 
     .wedding-card.out-of-focus {
-      opacity: 0.4;
-      filter: blur(3px);
+      opacity: 0.45;
+      filter: blur(2px);
       transform: scale(0.96);
     }
 
+    /* Section & Typography Elements */
     .crest-symbol {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 4px;
-      color: var(--gold-antique);
-      margin-bottom: 6px;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      color: var(--gold-deep);
+      margin-bottom: 2px;
       text-transform: uppercase;
+      font-weight: 700;
     }
 
     .sub-heading {
       font-family: 'Marcellus', serif;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: var(--text-muted);
-      line-height: 1.4;
+      line-height: 1.25;
       display: block;
-    }
-
-    .date-header-block {
-      margin-bottom: 20px;
-      width: 100%;
     }
 
     .names-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.8rem;
+      font-size: 3.3rem;
       color: var(--wine-primary);
-      line-height: 1.05;
+      line-height: 0.95;
       font-weight: 400;
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
     }
 
     .ampersand {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 1.3rem;
-      color: var(--gold-antique);
-      margin: 2px 0;
+      font-size: 1.15rem;
+      color: var(--gold-deep);
+      margin: 1px 0;
     }
 
     .date-badge {
       font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
       color: var(--wine-primary);
+      font-weight: 700;
       border-top: 1px solid var(--gold-antique);
       border-bottom: 1px solid var(--gold-antique);
-      padding: 8px 20px;
-      margin: 10px 0;
+      padding: 5px 14px;
+      margin: 6px 0;
       text-transform: uppercase;
     }
 
     .location-text {
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-family: 'Marcellus', serif;
     }
 
+    /* Darker shade for S & S footer monograms */
     .monogram-stamp {
       font-family: 'Cinzel', serif;
       font-size: 0.75rem;
-      letter-spacing: 5px;
-      color: var(--gold-antique);
+      letter-spacing: 3.5px;
+      color: var(--stamp-dark);
+      font-weight: 800;
       text-transform: uppercase;
+      opacity: 0.9;
     }
 
     .itinerary-container {
@@ -296,53 +300,40 @@
       margin: auto 0;
     }
 
+    .date-header-block {
+      margin-bottom: 14px;
+      width: 100%;
+    }
+
     .itinerary-track {
       position: relative;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      padding-left: 45px;
-      margin-top: 10px;
+      padding-left: 30px;
     }
 
     .vertical-spine {
       position: absolute;
-      left: 18px;
-      top: 10px;
-      bottom: 10px;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--gold-antique) 10%, var(--gold-antique) 90%, transparent);
+      left: 12px;
+      top: 4px;
+      bottom: 4px;
+      width: 1.5px;
+      background: linear-gradient(to bottom, transparent, var(--gold-antique) 15%, var(--gold-antique) 85%, transparent);
     }
 
     .pearl-node {
       position: absolute;
-      left: 18px;
-      top: 18px;
+      left: 12px;
+      top: 12px;
       transform: translate(-50%, -50%);
-      width: 13px;
-      height: 13px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f3e9d7 60%, var(--gold-antique) 100%);
-      box-shadow: 0 0 6px rgba(197, 158, 82, 0.6), 0 0 2px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 5px rgba(184, 142, 61, 0.7), 0 0 2px rgba(0, 0, 0, 0.4);
       z-index: 5;
       transition: top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .pearl-node::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1px solid var(--gold-light);
-      opacity: 0.6;
-      animation: pearlPulse 2s infinite ease-in-out;
-    }
-
-    @keyframes pearlPulse {
-      0% { transform: scale(0.9); opacity: 0.7; }
-      50% { transform: scale(1.25); opacity: 0.2; }
-      100% { transform: scale(0.9); opacity: 0.7; }
     }
 
     .event-item {
@@ -351,64 +342,96 @@
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
-      cursor: pointer;
-      opacity: 1;
-      filter: blur(0px);
-      transform: scale(1);
     }
 
     .event-dot {
       position: absolute;
-      left: -27px;
-      top: 8px;
+      left: -18px;
+      top: 5px;
       transform: translateX(-50%);
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background-color: var(--gold-antique);
+      background-color: var(--gold-deep);
       z-index: 3;
     }
 
     .event-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      letter-spacing: 1.5px;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
       color: var(--wine-primary);
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
     .event-details-box {
-      margin-top: 6px;
+      margin-top: 3px;
     }
 
     .event-datetime {
       font-family: 'Marcellus', serif;
-      font-size: 0.82rem;
-      color: var(--gold-deep);
-      letter-spacing: 1px;
+      font-size: 0.76rem;
+      color: var(--gold-darker);
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
     .location-link {
       display: inline-block;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--wine-primary);
+      font-weight: 600;
       text-decoration: none;
-      margin-top: 4px;
+      margin-top: 3px;
       font-family: 'Marcellus', serif;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
+      border-bottom: 1px dotted var(--wine-primary);
       transition: color 0.2s ease;
     }
 
     .location-link:hover {
       color: var(--gold-deep);
-      text-decoration: underline;
+      border-bottom-color: var(--gold-deep);
+    }
+
+    .card-blessings-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
+
+    .blessings-quote {
+      font-size: 0.92rem;
+      color: var(--wine-primary);
+      line-height: 1.35;
+      font-style: italic;
+      padding: 0 4px;
+      margin-top: 6px;
+    }
+
+    .host-section {
+      margin: 10px 0;
+    }
+
+    .host-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--wine-primary);
+      margin-top: 4px;
+      font-weight: 700;
+      line-height: 1.25;
     }
   </style>
 </head>
 <body>
 
+  <!-- Petals Canvas -->
   <canvas id="petals-canvas"></canvas>
 
   <div id="intro-overlay">
@@ -429,30 +452,29 @@
     </div>
   </div>
 
+  <!-- Cards Section -->
   <div class="cards-wrapper">
 
-    <!-- CARD 1: HERO -->
     <div class="wedding-card in-focus">
       <div></div>
       <div>
         <span class="sub-heading">Together with their families</span>
-        <div style="margin: 12px 0;">
+        <div style="margin: 6px 0;">
           <h1 class="names-title">Sukriti</h1>
-          <div class="ampersand">&</div>
+          <div class="ampersand">&amp;</div>
           <h1 class="names-title">Sidhant</h1>
         </div>
-        <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
+        <p style="font-style: italic; font-size: 0.88rem; color: var(--text-dark); margin-top: 4px;">
           request the honor of your presence to celebrate their wedding
         </p>
       </div>
       <div>
-        <div class="date-badge">December 02 & 03, 2026</div>
-        <div class="location-text" style="margin-top: 8px;">Lonavala & Khandala</div>
-        <div class="monogram-stamp" style="margin-top: 15px;">— S & S —</div>
+        <div class="date-badge">December 02 &amp; 03, 2026</div>
+        <div class="location-text" style="margin-top: 4px;">Khandala</div>
+        <div class="monogram-stamp" style="margin-top: 10px;">— S &amp; S —</div>
       </div>
     </div>
 
-    <!-- CARD 2: PROGRAM DAY I -->
     <div class="wedding-card out-of-focus" id="cardDay1">
       <div class="itinerary-container">
         <div class="crest-symbol">PROGRAM • DAY I</div>
@@ -469,16 +491,15 @@
             <div class="event-name">Haldi Mehandi Mandap</div>
             <div class="event-details-box">
               <div class="event-datetime">Wednesday • 2:00 PM</div>
-              <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+              <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="monogram-stamp">DAY I</div>
+      <div class="monogram-stamp">— S &amp; S —</div>
     </div>
 
-    <!-- CARD 3: PROGRAM DAY II -->
     <div class="wedding-card out-of-focus" id="cardDay2">
       <div class="itinerary-container">
         <div class="crest-symbol">PROGRAM • DAY II</div>
@@ -495,35 +516,39 @@
             <div class="event-name">Wedding</div>
             <div class="event-details-box">
               <div class="event-datetime">Thursday • 7:00 PM Onwards</div>
-              <a href="https://maps.google.com/?q=Amoravida+Khandala" target="_blank" class="location-link">Amoravida, Khandala ↗</a>
+              <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="monogram-stamp">DAY II</div>
+      <div class="monogram-stamp">— S &amp; S —</div>
     </div>
 
-    <!-- CARD 4: BLESSINGS / HOSTS -->
     <div class="wedding-card out-of-focus">
-      <div>
-        <div class="crest-symbol" style="margin-bottom: 12px;">BLESSINGS</div>
-        <p style="font-size: 1.1rem; color: var(--wine-primary); line-height: 1.5; font-style: italic; padding: 0 5px;">
-          "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
-        </p>
-      </div>
+      <div class="card-blessings-content">
+        <div>
+          <div class="crest-symbol">BLESSINGS</div>
+          <p class="blessings-quote">
+            "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
+          </p>
+        </div>
 
-      <div>
-        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 0 auto 18px auto;"></div>
-        <span class="sub-heading">Warmly Invited By:</span>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--wine-primary); margin-top: 6px; font-weight: 600; line-height: 1.4;">
-          Kanchan Devi<br>
-          Sangita & Sunil Kumar Shukla
-        </h3>
-      </div>
+        <div class="host-section">
+          <div style="width: 30px; height: 1px; background: var(--gold-antique); margin: 0 auto 6px auto;"></div>
+          <span class="sub-heading">Warmly Invited By:</span>
+          <h3 class="host-names">
+            Kanchan Shukla<br>
+            Sangita &amp; Sunil Kumar Shukla
+          </h3>
+        </div>
 
-      <div class="names-title" style="font-size: 2.2rem; color: var(--wine-primary);">
-        With Warm Regards
+        <div>
+          <div class="names-title" style="font-size: 1.7rem; color: var(--wine-primary); margin-bottom: 2px;">
+            With Warm Regards
+          </div>
+          <div class="monogram-stamp">— S &amp; S —</div>
+        </div>
       </div>
     </div>
 
@@ -540,7 +565,7 @@
       if (videoWrapper) videoWrapper.style.display = 'block';
       if (video) {
         video.muted = false;
-        video.play().catch(e => console.log('Playback error:', e));
+        video.play().catch(e => console.log('Video play error:', e));
       }
     }
 
@@ -554,7 +579,7 @@
       video.addEventListener('error', closeIntro);
     }
 
-    /* Scroll Observer for Focus/Blur Card Effect */
+    /* Card Focus Scroll Observer */
     const cards = document.querySelectorAll('.wedding-card');
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -570,8 +595,8 @@
 
     cards.forEach(card => cardObserver.observe(card));
 
-    /* Sync Pearl Node Positioning */
-    function setupItineraryCard(cardId, pearlId) {
+    /* Pearl Spine Node Alignment */
+    function setupPearlSpine(cardId, pearlId) {
       const card = document.getElementById(cardId);
       const pearl = document.getElementById(pearlId);
       if (!card || !pearl) return;
@@ -590,10 +615,11 @@
       setTimeout(syncPearl, 100);
     }
 
-    setupItineraryCard('cardDay1', 'pearlDay1');
-    setupItineraryCard('cardDay2', 'pearlDay2');
+    setupPearlSpine('cardDay1', 'pearlDay1');
+    setupPearlSpine('cardDay2', 'pearlDay2');
 
-    (function initPetalsCanvas() {
+    /* Slow Petals Canvas Engine (15 Petals) */
+    (function initPetalShower() {
       const canvas = document.getElementById('petals-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
@@ -606,16 +632,14 @@
         height = canvas.height = window.innerHeight;
       });
 
-      // Palette matching card_background.jpg (Deep wine, rose pinks, gold tones, creams)
       const petalColors = [
-        { fill: '#82262b', opacity: 0.7 }, // Deep Wine
-        { fill: '#b83b43', opacity: 0.65 }, // Soft Rose
-        { fill: '#d97b83', opacity: 0.6 }, // Light Pink
-        { fill: '#c59e52', opacity: 0.5 }, // Antique Gold Accent
-        { fill: '#ebd2b0', opacity: 0.55 }  // Warm Cream
+        { fill: '#82262b', opacity: 0.75 },
+        { fill: '#b83b43', opacity: 0.70 },
+        { fill: '#d97b83', opacity: 0.65 },
+        { fill: '#c59e52', opacity: 0.60 }
       ];
 
-      const numPetals = 35; // Ideal quantity for realistic mobile drifting without performance drag
+      const numPetals = 15;
       const petals = [];
 
       class Petal {
@@ -626,23 +650,23 @@
         reset(initial = false) {
           this.x = Math.random() * width;
           this.y = initial ? Math.random() * height : -20;
-          this.size = 8 + Math.random() * 10;
-          this.speedY = 0.8 + Math.random() * 1.4;
-          this.speedX = (Math.random() - 0.5) * 0.8;
+          this.size = 7 + Math.random() * 7;
+          this.speedY = 0.25 + Math.random() * 0.35;
+          this.speedX = (Math.random() - 0.5) * 0.35;
           this.angle = Math.random() * Math.PI * 2;
-          this.angularSpeed = (Math.random() - 0.5) * 0.03;
+          this.angularSpeed = (Math.random() - 0.5) * 0.012;
           this.oscillation = Math.random() * Math.PI * 2;
-          this.oscillationSpeed = 0.01 + Math.random() * 0.02;
+          this.oscillationSpeed = 0.008 + Math.random() * 0.01;
 
-          const colorObj = petalColors[Math.floor(Math.random() * petalColors.length)];
-          this.color = colorObj.fill;
-          this.baseOpacity = colorObj.opacity;
+          const col = petalColors[Math.floor(Math.random() * petalColors.length)];
+          this.color = col.fill;
+          this.baseOpacity = col.opacity;
         }
 
         update() {
           this.y += this.speedY;
           this.oscillation += this.oscillationSpeed;
-          this.x += this.speedX + Math.sin(this.oscillation) * 0.6;
+          this.x += this.speedX + Math.sin(this.oscillation) * 0.35;
           this.angle += this.angularSpeed;
 
           if (this.y > height + 20 || this.x < -20 || this.x > width + 20) {
@@ -656,7 +680,6 @@
           ctx.rotate(this.angle);
           ctx.globalAlpha = this.baseOpacity;
 
-          // Draw realistic teardrop organic rose petal shape
           ctx.beginPath();
           ctx.fillStyle = this.color;
           ctx.moveTo(0, -this.size);
@@ -672,16 +695,16 @@
         petals.push(new Petal());
       }
 
-      function animatePetals() {
+      function renderLoop() {
         ctx.clearRect(0, 0, width, height);
-        petals.forEach(p => {
-          p.update();
-          p.draw();
+        petals.forEach(petal => {
+          petal.update();
+          petal.draw();
         });
-        requestAnimationFrame(animatePetals);
+        requestAnimationFrame(renderLoop);
       }
 
-      animatePetals();
+      renderLoop();
     })();
   </script>
 </body>
