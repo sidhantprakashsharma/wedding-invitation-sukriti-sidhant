@@ -1,18 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Wedding Invitation | Sukriti &amp; Sidhant</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #0f0406;
+      --bg-dark: #0b0204;
       --bg-wine-grad: #240a0e;
       --card-fallback: #f7f2e8;
       --wine-primary: #7a1d22;
@@ -20,21 +21,21 @@
       --gold-antique: #b88e3d;
       --gold-deep: #785a20;
       --gold-darker: #594215;
-      --gold-light: #e0c58a;
       --text-dark: #241315;
       --text-muted: #5e484b;
-      --stamp-dark: #3b0d10; /* Darker shade for S & S footer monograms */
+      --stamp-dark: #3b0d10; /* Darker wine shade for S & S footer */
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
       width: 100%;
-      min-height: 100vh;
+      height: 100%;
       background: radial-gradient(circle at 50% 30%, var(--bg-wine-grad) 0%, var(--bg-dark) 85%);
       background-attachment: fixed;
       font-family: 'Cormorant Garamond', serif;
@@ -54,6 +55,7 @@
       z-index: 10;
     }
 
+    /* Full-screen Intro Overlay */
     #intro-overlay {
       position: fixed;
       inset: 0;
@@ -175,6 +177,73 @@
       color: var(--wine-dark);
     }
 
+    /* Fixed Top Page Indicator */
+    .page-indicator {
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      background: rgba(11, 2, 4, 0.75);
+      border: 1px solid var(--gold-antique);
+      color: #f7f2e8;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Floating Bottom Navigation Controls */
+    .nav-controls {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(11, 2, 4, 0.85);
+      border: 1px solid var(--gold-antique);
+      padding: 8px 18px;
+      border-radius: 30px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--gold-antique);
+      font-family: 'Marcellus', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      color: #ffffff;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--gold-antique);
+      opacity: 0.5;
+    }
+
+    /* Cards Stack Area */
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -182,26 +251,26 @@
       flex-direction: column;
       align-items: center;
       gap: 70px;
-      padding: 60px 15px;
+      padding: 55px 15px 85px 15px;
     }
 
     .wedding-card {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 440px;
-      height: 700px;
-      max-height: 90vh;
+      max-width: 420px;
+      height: 680px;
+      max-height: 85vh;
       background-color: var(--card-fallback);
       background-image: url('card_background.jpg');
       background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
-      border-radius: 4px;
+      border-radius: 6px;
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 15px rgba(122, 29, 34, 0.2);
 
-      /* STRICT UNIFORM PADDING (130px Top, 45px Right, 140px Bottom, 45px Left) */
-      padding: 130px 45px 140px 45px;
+      /* STRICT MANDATORY UNIFORM FRAME PADDING ACROSS ALL CARDS */
+      padding: 130px 45px 140px 45px !important;
 
       display: flex;
       flex-direction: column;
@@ -223,15 +292,23 @@
       transform: scale(0.96);
     }
 
-    /* Section & Typography Elements */
+    .card-content-area {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .crest-symbol {
       font-family: 'Cinzel', serif;
       font-size: 0.78rem;
       letter-spacing: 3px;
       color: var(--gold-deep);
-      margin-bottom: 2px;
       text-transform: uppercase;
       font-weight: 700;
+      margin-bottom: 2px;
     }
 
     .sub-heading {
@@ -246,7 +323,7 @@
 
     .names-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.3rem;
+      font-size: 3.2rem;
       color: var(--wine-primary);
       line-height: 0.95;
       font-weight: 400;
@@ -262,36 +339,37 @@
 
     .date-badge {
       font-family: 'Cinzel', serif;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
       color: var(--wine-primary);
       font-weight: 700;
       border-top: 1px solid var(--gold-antique);
       border-bottom: 1px solid var(--gold-antique);
-      padding: 5px 14px;
+      padding: 4px 10px;
       margin: 6px 0;
       text-transform: uppercase;
     }
 
     .location-text {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-family: 'Marcellus', serif;
     }
 
-    /* Darker shade for S & S footer monograms */
+    /* Darker Footer Stamp (#3b0d10) */
     .monogram-stamp {
       font-family: 'Cinzel', serif;
       font-size: 0.75rem;
       letter-spacing: 3.5px;
-      color: var(--stamp-dark);
-      font-weight: 800;
+      color: var(--stamp-dark) !important;
+      font-weight: 800 !important;
       text-transform: uppercase;
-      opacity: 0.9;
+      margin-top: 4px;
     }
 
+    /* Itinerary Formatting Pages 2 & 3 */
     .itinerary-container {
       width: 100%;
       display: flex;
@@ -300,95 +378,38 @@
       margin: auto 0;
     }
 
-    .date-header-block {
-      margin-bottom: 14px;
-      width: 100%;
-    }
-
-    .itinerary-track {
-      position: relative;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      padding-left: 30px;
-    }
-
-    .vertical-spine {
-      position: absolute;
-      left: 12px;
-      top: 4px;
-      bottom: 4px;
-      width: 1.5px;
-      background: linear-gradient(to bottom, transparent, var(--gold-antique) 15%, var(--gold-antique) 85%, transparent);
-    }
-
-    .pearl-node {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      transform: translate(-50%, -50%);
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f3e9d7 60%, var(--gold-antique) 100%);
-      box-shadow: 0 0 5px rgba(184, 142, 61, 0.7), 0 0 2px rgba(0, 0, 0, 0.4);
-      z-index: 5;
-      transition: top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .event-item {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .event-dot {
-      position: absolute;
-      left: -18px;
-      top: 5px;
-      transform: translateX(-50%);
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background-color: var(--gold-deep);
-      z-index: 3;
-    }
-
-    .event-name {
+    .event-title-main {
       font-family: 'Cinzel', serif;
-      font-size: 0.88rem;
-      letter-spacing: 0.5px;
+      font-size: 1.05rem;
+      letter-spacing: 1.5px;
       color: var(--wine-primary);
       font-weight: 700;
       text-transform: uppercase;
+      margin: 12px 0 6px 0;
       line-height: 1.25;
     }
 
-    .event-details-box {
-      margin-top: 3px;
-    }
-
-    .event-datetime {
+    .event-datetime-sub {
       font-family: 'Marcellus', serif;
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       color: var(--gold-darker);
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+      line-height: 1.3;
     }
 
     .location-link {
       display: inline-block;
       font-size: 0.78rem;
       color: var(--wine-primary);
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
-      margin-top: 3px;
       font-family: 'Marcellus', serif;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
       border-bottom: 1px dotted var(--wine-primary);
-      transition: color 0.2s ease;
+      padding-bottom: 1px;
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
 
     .location-link:hover {
@@ -396,36 +417,44 @@
       border-bottom-color: var(--gold-deep);
     }
 
-    .card-blessings-content {
+    /* Page 4 Blessings & Hosts Formatting */
+    .blessing-block {
+      margin: auto 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      height: 100%;
-      width: 100%;
-      padding: 0;
+      gap: 3px;
     }
 
-    .blessings-quote {
-      font-size: 0.92rem;
+    .blessing-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.88rem;
       color: var(--wine-primary);
-      line-height: 1.35;
       font-style: italic;
-      padding: 0 4px;
-      margin-top: 6px;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .divider-line {
+      width: 32px;
+      height: 1px;
+      background: var(--gold-antique);
+      margin: 10px auto;
     }
 
     .host-section {
-      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .host-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       color: var(--wine-primary);
-      margin-top: 4px;
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1.35;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -434,6 +463,17 @@
   <!-- Petals Canvas -->
   <canvas id="petals-canvas"></canvas>
 
+  <!-- Top Page Indicator -->
+  <div class="page-indicator" id="page-indicator">1 / 4</div>
+
+  <!-- Bottom Navigation Buttons -->
+  <div class="nav-controls">
+    <button class="nav-btn" id="btn-prev" onclick="navigateCard(-1)">Prev</button>
+    <div class="nav-divider"></div>
+    <button class="nav-btn" id="btn-next" onclick="navigateCard(1)">Next</button>
+  </div>
+
+  <!-- Intro Cover Overlay -->
   <div id="intro-overlay">
     <div id="cover-screen" class="cover-screen">
       <div class="cover-subtitle">Wedding Invitation</div>
@@ -452,101 +492,93 @@
     </div>
   </div>
 
-  <!-- Cards Section -->
+  <!-- Cards Container -->
   <div class="cards-wrapper">
 
-    <div class="wedding-card in-focus">
-      <div></div>
-      <div>
-        <span class="sub-heading">Together with their families</span>
-        <div style="margin: 6px 0;">
+    <!-- PAGE 1: SAVE THE DATE -->
+    <div class="wedding-card in-focus" id="card-1">
+      <div class="card-content-area">
+        <div>
+          <div class="crest-symbol">SAVE THE DATE</div>
+          <span class="sub-heading" style="margin-top: 4px;">Together with their families</span>
+        </div>
+
+        <div style="margin: 4px 0;">
           <h1 class="names-title">Sukriti</h1>
           <div class="ampersand">&amp;</div>
           <h1 class="names-title">Sidhant</h1>
-        </div>
-        <p style="font-style: italic; font-size: 0.88rem; color: var(--text-dark); margin-top: 4px;">
-          request the honor of your presence to celebrate their wedding
-        </p>
-      </div>
-      <div>
-        <div class="date-badge">December 02 &amp; 03, 2026</div>
-        <div class="location-text" style="margin-top: 4px;">Khandala</div>
-        <div class="monogram-stamp" style="margin-top: 10px;">— S &amp; S —</div>
-      </div>
-    </div>
-
-    <div class="wedding-card out-of-focus" id="cardDay1">
-      <div class="itinerary-container">
-        <div class="crest-symbol">PROGRAM • DAY I</div>
-        <div class="date-header-block">
-          <span class="sub-heading">Wednesday, December 02, 2026</span>
+          <span class="sub-heading" style="margin-top: 8px; font-style: italic; text-transform: none; font-size: 0.85rem; color: var(--text-dark);">
+            Are Getting Married
+          </span>
         </div>
 
-        <div class="itinerary-track">
-          <div class="vertical-spine"></div>
-          <div class="pearl-node" id="pearlDay1"></div>
-
-          <div class="event-item">
-            <div class="event-dot"></div>
-            <div class="event-name">Haldi Mehandi Mandap</div>
-            <div class="event-details-box">
-              <div class="event-datetime">Wednesday • 2:00 PM</div>
-              <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="monogram-stamp">— S &amp; S —</div>
-    </div>
-
-    <div class="wedding-card out-of-focus" id="cardDay2">
-      <div class="itinerary-container">
-        <div class="crest-symbol">PROGRAM • DAY II</div>
-        <div class="date-header-block">
-          <span class="sub-heading">Thursday, December 03, 2026</span>
-        </div>
-
-        <div class="itinerary-track">
-          <div class="vertical-spine"></div>
-          <div class="pearl-node" id="pearlDay2"></div>
-
-          <div class="event-item">
-            <div class="event-dot"></div>
-            <div class="event-name">Wedding</div>
-            <div class="event-details-box">
-              <div class="event-datetime">Thursday • 7:00 PM Onwards</div>
-              <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="monogram-stamp">— S &amp; S —</div>
-    </div>
-
-    <div class="wedding-card out-of-focus">
-      <div class="card-blessings-content">
         <div>
-          <div class="crest-symbol">BLESSINGS</div>
-          <p class="blessings-quote">
-            "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
-          </p>
+          <div class="date-badge">December 02 &amp; 03, 2026</div>
+          <div class="location-text" style="margin-top: 4px;">Khandala</div>
+          <div class="monogram-stamp" style="margin-top: 8px;">— S &amp; S —</div>
         </div>
+      </div>
+    </div>
+
+    <!-- PAGE 2: DAY 1 ITINERARY -->
+    <div class="wedding-card out-of-focus" id="card-2">
+      <div class="card-content-area">
+        <div class="crest-symbol">PROGRAM • DAY I</div>
+
+        <div class="itinerary-container">
+          <span class="sub-heading">JOIN US FOR</span>
+          <h2 class="event-title-main">HALDI MEHANDI MANDAP</h2>
+          <div class="event-datetime-sub">Wednesday, Dec 02, 2026 | 2:00 PM</div>
+          <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
+        </div>
+
+        <div>
+          <div class="monogram-stamp">— S &amp; S —</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: DAY 2 ITINERARY -->
+    <div class="wedding-card out-of-focus" id="card-3">
+      <div class="card-content-area">
+        <div class="crest-symbol">PROGRAM • DAY II</div>
+
+        <div class="itinerary-container">
+          <span class="sub-heading">THE CELEBRATION OF</span>
+          <h2 class="event-title-main">THE WEDDING</h2>
+          <div class="event-datetime-sub">Thursday, Dec 03, 2026 | 7:00 PM Onwards</div>
+          <a href="https://maps.google.com/?q=Amoravida+by+7Apple+Khandala" target="_blank" rel="noopener" class="location-link">Amoravida by 7Apple, Khandala ↗</a>
+        </div>
+
+        <div>
+          <div class="monogram-stamp">— S &amp; S —</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: BLESSINGS & HOSTS -->
+    <div class="wedding-card out-of-focus" id="card-4">
+      <div class="card-content-area">
+        <div class="crest-symbol">BLESSINGS</div>
+
+        <!-- Blessing Verse divided into 3 distinct lines -->
+        <div class="blessing-block">
+          <span class="blessing-line">With the divine blessings of our ancestors,</span>
+          <span class="blessing-line">we cordially invite you to celebrate</span>
+          <span class="blessing-line">the wedding of Sukriti &amp; Sidhant.</span>
+        </div>
+
+        <div class="divider-line"></div>
 
         <div class="host-section">
-          <div style="width: 30px; height: 1px; background: var(--gold-antique); margin: 0 auto 6px auto;"></div>
           <span class="sub-heading">Warmly Invited By:</span>
-          <h3 class="host-names">
-            Kanchan Shukla<br>
-            Sangita &amp; Sunil Kumar Shukla
-          </h3>
+          <div class="host-names">
+            <div>Kanchan Shukla</div>
+            <div>Sangita &amp; Sunil Kumar Shukla</div>
+          </div>
         </div>
 
         <div>
-          <div class="names-title" style="font-size: 1.7rem; color: var(--wine-primary); margin-bottom: 2px;">
-            With Warm Regards
-          </div>
           <div class="monogram-stamp">— S &amp; S —</div>
         </div>
       </div>
@@ -555,6 +587,7 @@
   </div>
 
   <script>
+    /* Intro Video Logic */
     const overlay = document.getElementById('intro-overlay');
     const coverScreen = document.getElementById('cover-screen');
     const videoWrapper = document.getElementById('video-wrapper');
@@ -579,46 +612,79 @@
       video.addEventListener('error', closeIntro);
     }
 
-    /* Card Focus Scroll Observer */
-    const cards = document.querySelectorAll('.wedding-card');
+    /* Page State & Card Navigation */
+    const cards = Array.from(document.querySelectorAll('.wedding-card'));
+    const totalPages = cards.length;
+    let currentCardIndex = 0;
+
+    const pageIndicator = document.getElementById('page-indicator');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+
+    function updateNavUI() {
+      if (pageIndicator) pageIndicator.textContent = `${currentCardIndex + 1} / ${totalPages}`;
+      if (btnPrev) btnPrev.disabled = currentCardIndex === 0;
+      if (btnNext) btnNext.disabled = currentCardIndex === totalPages - 1;
+    }
+
+    function scrollToCard(index) {
+      if (index >= 0 && index < totalPages) {
+        currentCardIndex = index;
+        cards[currentCardIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        updateNavUI();
+      }
+    }
+
+    function navigateCard(direction) {
+      scrollToCard(currentCardIndex + direction);
+    }
+
+    /* Intersection Observer for Automatic Scroll Detection */
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-focus');
           entry.target.classList.remove('out-of-focus');
+          const idx = cards.indexOf(entry.target);
+          if (idx !== -1) {
+            currentCardIndex = idx;
+            updateNavUI();
+          }
         } else {
           entry.target.classList.remove('in-focus');
           entry.target.classList.add('out-of-focus');
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.5 });
 
     cards.forEach(card => cardObserver.observe(card));
 
-    /* Pearl Spine Node Alignment */
-    function setupPearlSpine(cardId, pearlId) {
-      const card = document.getElementById(cardId);
-      const pearl = document.getElementById(pearlId);
-      if (!card || !pearl) return;
+    /* Touch Swipe Gesture Detection */
+    let touchStartY = 0;
+    let touchEndY = 0;
 
-      function syncPearl() {
-        const targetDot = card.querySelector('.event-dot');
-        if (targetDot) {
-          const trackRect = card.querySelector('.itinerary-track').getBoundingClientRect();
-          const dotRect = targetDot.getBoundingClientRect();
-          const relativeTop = (dotRect.top + dotRect.height / 2) - trackRect.top;
-          pearl.style.top = `${relativeTop}px`;
-        }
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.changedTouches[0].screenY;
+    }, false);
+
+    window.addEventListener('touchend', (e) => {
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipeGesture();
+    }, false);
+
+    function handleSwipeGesture() {
+      const swipeDistance = touchStartY - touchEndY;
+      const minSwipe = 50; // Minimum swipe distance in px
+      if (swipeDistance > minSwipe) {
+        // Swiped UP -> Next
+        if (currentCardIndex < totalPages - 1) scrollToCard(currentCardIndex + 1);
+      } else if (swipeDistance < -minSwipe) {
+        // Swiped DOWN -> Prev
+        if (currentCardIndex > 0) scrollToCard(currentCardIndex - 1);
       }
-
-      window.addEventListener('resize', syncPearl);
-      setTimeout(syncPearl, 100);
     }
 
-    setupPearlSpine('cardDay1', 'pearlDay1');
-    setupPearlSpine('cardDay2', 'pearlDay2');
-
-    /* Slow Petals Canvas Engine (15 Petals) */
+    /* Gentle Slow Rose & Gold Petals Canvas Engine (Max 15 Petals) */
     (function initPetalShower() {
       const canvas = document.getElementById('petals-canvas');
       if (!canvas) return;
@@ -705,6 +771,7 @@
       }
 
       renderLoop();
+      updateNavUI();
     })();
   </script>
 </body>
