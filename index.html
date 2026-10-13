@@ -41,9 +41,7 @@
       scroll-behavior: smooth;
     }
 
-    /* ==========================================
-       1. INTRO VIDEO OVERLAY
-       ========================================== */
+    /* Video intro overlay */
     #intro-overlay {
       position: fixed;
       inset: 0;
@@ -65,7 +63,7 @@
     #intro-video {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Prevents video cropping */
+      object-fit: contain;
     }
 
     .overlay-controls {
@@ -99,9 +97,7 @@
       color: var(--wine-deep);
     }
 
-    /* ==========================================
-       2. CARDS CONTAINER LAYOUT
-       ========================================== */
+    /* Card Layout & Frame Safe Padding */
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -112,40 +108,26 @@
       padding: 80px 15px;
     }
 
-    /* Physical Stationery Card Container */
     .wedding-card {
       position: relative;
       z-index: 2;
       width: 100%;
       max-width: 440px;
-      min-height: 700px;
-      
-      /* Card Texture Background */
+      min-height: 760px;
       background-color: var(--card-fallback);
-      background-image: url('paper_texture.jpg');
+      background-image: url('card_background.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      
       border-radius: 4px;
-
-      box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.65),
-        0 8px 16px rgba(0, 0, 0, 0.35),
-        0 0 20px rgba(130, 38, 43, 0.15),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), 0 8px 16px rgba(0, 0, 0, 0.35), 0 0 20px rgba(130, 38, 43, 0.15);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 2.8rem 2.2rem;
+      padding: 130px 60px 140px 60px; /* Safe padding for floral frame */
       text-align: center;
-
-      /* Soft Depth-Blur Focus Transitions */
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .wedding-card.in-focus {
@@ -160,43 +142,6 @@
       transform: scale(0.96);
     }
 
-    .card-border {
-      position: absolute;
-      inset: 14px;
-      border: 1px solid var(--gold-antique);
-      pointer-events: none;
-    }
-
-    .card-border::after {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(197, 158, 82, 0.35);
-    }
-
-    /* ==========================================
-       3. ANTIQUE JHAROKHA CREST & TYPOGRAPHY
-       ========================================== */
-    .jharokha-crest-container {
-      width: 100px;
-      height: 115px;
-      margin-bottom: 2px;
-      opacity: 0.95;
-    }
-
-    .jharokha-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .crest-symbol {
-      font-family: 'Cinzel', serif;
-      font-size: 0.85rem;
-      letter-spacing: 4px;
-      color: var(--gold-antique);
-      margin-bottom: 5px;
-    }
-
     .sub-heading {
       font-family: 'Marcellus', serif;
       font-size: 0.78rem;
@@ -207,7 +152,7 @@
 
     .names-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 4rem;
+      font-size: 3.8rem;
       color: var(--wine-primary);
       line-height: 1.05;
       font-weight: 400;
@@ -217,25 +162,25 @@
     .ampersand {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--gold-antique);
       margin: 2px 0;
     }
 
     .date-badge {
       font-family: 'Cinzel', serif;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       letter-spacing: 3px;
       color: var(--wine-primary);
       border-top: 1px solid var(--gold-antique);
       border-bottom: 1px solid var(--gold-antique);
-      padding: 8px 24px;
-      margin: 12px 0;
+      padding: 8px 20px;
+      margin: 10px 0;
       text-transform: uppercase;
     }
 
     .location-text {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -250,17 +195,15 @@
       text-transform: uppercase;
     }
 
-    /* ==========================================
-       4. ITINERARY SPINE & MOVING PEARL
-       ========================================== */
+    /* Pearl Timeline Track */
     .itinerary-track {
       position: relative;
       width: 100%;
       margin: 15px 0;
       display: flex;
       flex-direction: column;
-      gap: 32px;
-      padding-left: 54px;
+      gap: 28px;
+      padding-left: 50px;
     }
 
     .vertical-spine {
@@ -269,13 +212,7 @@
       top: 15px;
       bottom: 15px;
       width: 1px;
-      background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--gold-antique) 10%,
-        var(--gold-antique) 90%,
-        transparent
-      );
+      background: linear-gradient(to bottom, transparent, var(--gold-antique) 10%, var(--gold-antique) 90%, transparent);
     }
 
     .pearl-node {
@@ -287,9 +224,7 @@
       height: 13px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f3e9d7 60%, var(--gold-antique) 100%);
-      box-shadow: 
-        0 0 6px rgba(197, 158, 82, 0.6),
-        0 0 2px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 6px rgba(197, 158, 82, 0.6), 0 0 2px rgba(0, 0, 0, 0.4);
       z-index: 5;
       transition: top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -331,7 +266,7 @@
 
     .event-dot {
       position: absolute;
-      left: -36px;
+      left: -32px;
       top: 8px;
       transform: translateX(-50%);
       width: 5px;
@@ -343,7 +278,7 @@
 
     .event-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       letter-spacing: 1.5px;
       color: var(--wine-primary);
       font-weight: 600;
@@ -365,14 +300,14 @@
 
     .event-datetime {
       font-family: 'Marcellus', serif;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--gold-deep);
       letter-spacing: 1px;
     }
 
     .location-link {
       display: inline-block;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--wine-primary);
       text-decoration: none;
       margin-top: 3px;
@@ -385,32 +320,9 @@
       color: var(--gold-deep);
       text-decoration: underline;
     }
-
-    .btn-action {
-      background: var(--wine-primary);
-      color: #fff;
-      border: 1px solid var(--gold-antique);
-      padding: 10px 24px;
-      font-family: 'Marcellus', serif;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border-radius: 2px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s ease;
-    }
-
-    .btn-action:hover {
-      background: var(--gold-antique);
-      color: var(--wine-deep);
-    }
   </style>
 </head>
 <body>
-
-  <!-- 1. INTRO VIDEO OVERLAY -->
   <div id="intro-overlay">
     <video id="intro-video" playsinline autoplay muted>
       <source src="wedding_intro.mp4" type="video/mp4">
@@ -420,190 +332,91 @@
     </div>
   </div>
 
-  <!-- 2. MAIN CARDS CONTAINER -->
   <div class="cards-wrapper">
-
-    <!-- CARD 1: HERO -->
+    <!-- HERO CARD -->
     <div class="wedding-card in-focus">
-      <div class="card-border"></div>
-
-      <!-- ANTIQUE GOLD JHAROKHA CREST -->
-      <div class="jharokha-crest-container">
-        <svg class="jharokha-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="antiqueGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#8f6e2e" />
-              <stop offset="50%" stop-color="#e4c98b" />
-              <stop offset="100%" stop-color="#c59e52" />
-            </linearGradient>
-          </defs>
-
-          <!-- Lotus Crown Peak -->
-          <path d="M50 8 C48 13 43 16 43 20 C43 23 46 24 50 21 C54 24 57 23 57 20 C57 16 52 13 50 8 Z" fill="url(#antiqueGoldGrad)" />
-
-          <!-- Outer Jharokha Arch -->
-          <path d="M16 104 L16 52 C16 33 30 23 50 23 C70 23 84 33 84 52 L84 104" stroke="url(#antiqueGoldGrad)" stroke-width="1.2" fill="none" />
-          
-          <!-- Inner Cusped Scalloped Arch -->
-          <path d="M22 104 L22 56 C22 46 28 41 33 43 C38 45 42 39 50 37 C58 39 62 45 67 43 C72 41 78 46 78 56 L78 104" stroke="url(#antiqueGoldGrad)" stroke-width="1" fill="none" />
-
-          <!-- Delicate Lattice Lines -->
-          <line x1="16" y1="30" x2="84" y2="30" stroke="url(#antiqueGoldGrad)" stroke-width="0.8" />
-          <circle cx="50" cy="28" r="1.5" fill="url(#antiqueGoldGrad)" />
-          <circle cx="38" cy="30.5" r="1" fill="url(#antiqueGoldGrad)" />
-          <circle cx="62" cy="30.5" r="1" fill="url(#antiqueGoldGrad)" />
-
-          <!-- Base Pendant -->
-          <path d="M50 104 L50 110 M48 110 C48 113 50 115 50 115 C50 115 52 113 52 110 Z" stroke="url(#antiqueGoldGrad)" stroke-width="1" fill="url(#antiqueGoldGrad)" />
-
-          <!-- Monogram S & S -->
-          <text x="50" y="69" font-family="'Cinzel', serif" font-size="12.5" font-weight="600" fill="url(#antiqueGoldGrad)" text-anchor="middle" letter-spacing="1.5">S&amp;S</text>
-        </svg>
+      <div></div> <!-- Spacer for balance -->
+      <div>
+        <span class="sub-heading">Together with their families</span>
+        <div style="margin: 12px 0;">
+          <h1 class="names-title">Sukriti</h1>
+          <div class="ampersand">&</div>
+          <h1 class="names-title">Sidhant</h1>
+        </div>
+        <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
+          request the honor of your presence to celebrate their wedding
+        </p>
       </div>
-
-      <span class="sub-heading">Together with their families</span>
-
-      <div style="margin: 6px 0;">
-        <h1 class="names-title">Sukriti</h1>
-        <div class="ampersand">&</div>
-        <h1 class="names-title">Sidhant</h1>
+      <div>
+        <div class="date-badge">December 02 & 03, 2026</div>
+        <div class="location-text" style="margin-top: 8px;">Lonavala & Khandala</div>
+        <div class="monogram-stamp" style="margin-top: 15px;">— S & S —</div>
       </div>
-
-      <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
-        request the honor of your presence to celebrate their wedding
-      </p>
-
-      <div class="date-badge">
-        December 02 & 03, 2026
-      </div>
-
-      <div class="location-text">
-        Lonavala & Khandala
-      </div>
-
-      <div class="monogram-stamp">— S & S —</div>
     </div>
 
-    <!-- CARD 2: PROGRAM - DAY I -->
+    <!-- DAY 1 ITINERARY CARD -->
     <div class="wedding-card out-of-focus" id="cardDay1">
-      <div class="card-border"></div>
-      <div class="crest-symbol">PROGRAM • DAY I</div>
-      <span class="sub-heading">Wednesday, December 02, 2026</span>
-
+      <div>
+        <span class="sub-heading">Wednesday, December 02, 2026</span>
+      </div>
       <div class="itinerary-track">
         <div class="vertical-spine"></div>
         <div class="pearl-node" id="pearlDay1"></div>
-
         <div class="event-item active" data-index="0">
           <div class="event-dot"></div>
-          <div class="event-name">Ganesh Poojan</div>
-          <div class="event-details-box">
-            <div class="event-datetime">Wednesday • 1:00 PM</div>
-            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
-          </div>
-        </div>
-
-        <div class="event-item" data-index="1">
-          <div class="event-dot"></div>
-          <div class="event-name">Mandap</div>
+          <div class="event-name">Haldi Mehandi Mandap</div>
           <div class="event-details-box">
             <div class="event-datetime">Wednesday • 2:00 PM</div>
             <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
           </div>
         </div>
       </div>
-
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sukriti+%26+Sidhant+Wedding+Day+1&dates=20261202T073000Z/20261202T180000Z&details=Ganesh+Poojan+%26+Mandap+at+Hotel+Sapphire+Lonavala" target="_blank" class="btn-action">
-        Save Day 1 To Calendar
-      </a>
+      <div class="monogram-stamp">DAY I</div>
     </div>
 
-    <!-- CARD 3: PROGRAM - DAY II -->
+    <!-- DAY 2 ITINERARY CARD -->
     <div class="wedding-card out-of-focus" id="cardDay2">
-      <div class="card-border"></div>
-      <div class="crest-symbol">PROGRAM • DAY II</div>
-      <span class="sub-heading">Thursday, December 03, 2026</span>
-
+      <div>
+        <span class="sub-heading">Thursday, December 03, 2026</span>
+      </div>
       <div class="itinerary-track">
         <div class="vertical-spine"></div>
         <div class="pearl-node" id="pearlDay2"></div>
-
         <div class="event-item active" data-index="0">
           <div class="event-dot"></div>
-          <div class="event-name">Mamera</div>
+          <div class="event-name">Wedding</div>
           <div class="event-details-box">
-            <div class="event-datetime">Thursday • 11:00 AM</div>
-            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
-          </div>
-        </div>
-
-        <div class="event-item" data-index="1">
-          <div class="event-dot"></div>
-          <div class="event-name">Barat</div>
-          <div class="event-details-box">
-            <div class="event-datetime">Thursday • 5:00 PM</div>
-            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
-          </div>
-        </div>
-
-        <div class="event-item" data-index="2">
-          <div class="event-dot"></div>
-          <div class="event-name">Dinner</div>
-          <div class="event-details-box">
-            <div class="event-datetime">Thursday • 9:00 PM</div>
-            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
-          </div>
-        </div>
-
-        <div class="event-item" data-index="3">
-          <div class="event-dot"></div>
-          <div class="event-name" style="color: var(--gold-deep);">Vivah (Pheras)</div>
-          <div class="event-details-box">
-            <div class="event-datetime">Thursday • Late Night</div>
+            <div class="event-datetime">Thursday • 7:00 PM Onwards</div>
             <a href="https://maps.google.com/?q=Amoravida+Khandala" target="_blank" class="location-link">Amoravida, Khandala ↗</a>
           </div>
         </div>
       </div>
-
-      <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sukriti+%26+Sidhant+Wedding+Day+2&dates=20261203T053000Z/20261204T020000Z&details=Mamera%2C+Barat%2C+Dinner+%26+Vivah+at+Hotel+Sapphire+%26+Amoravida" target="_blank" class="btn-action">
-        Save Day 2 To Calendar
-      </a>
+      <div class="monogram-stamp">DAY II</div>
     </div>
 
-    <!-- CARD 4: BLESSINGS -->
+    <!-- BLESSINGS / HOST CARD -->
     <div class="wedding-card out-of-focus">
-      <div class="card-border"></div>
-      <div class="crest-symbol">BLESSINGS</div>
-
-      <p style="font-size: 1.15rem; color: var(--wine-primary); line-height: 1.6; font-style: italic; padding: 0 10px;">
-        "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
-      </p>
-
-      <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 5px 0;"></div>
-
+      <div></div>
       <div>
-        <span class="sub-heading">Bride's Parents</span>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--wine-primary); margin-top: 4px; font-weight: 600;">
-          Sangita & Sunil Kumar Shukla
-        </h3>
+        <p style="font-size: 1.1rem; color: var(--wine-primary); line-height: 1.5; font-style: italic; padding: 0 5px;">
+          "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
+        </p>
+        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 25px auto;"></div>
+        <div>
+          <span class="sub-heading">Warmly Invited By:</span>
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--wine-primary); margin-top: 8px; font-weight: 600; line-height: 1.4;">
+            Kanchan Devi<br>
+            Sangita & Sunil Kumar Shukla
+          </h3>
+        </div>
       </div>
-
-      <div>
-        <span class="sub-heading">Groom's Parents</span>
-        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--wine-primary); margin-top: 4px; font-weight: 600;">
-          Sadhana & Om Prakash Sharma
-        </h3>
-      </div>
-
-      <div class="names-title" style="font-size: 2.8rem; margin-top: 10px; color: var(--wine-primary);">
+      <div class="names-title" style="font-size: 2.2rem; color: var(--wine-primary);">
         With Warm Regards
       </div>
     </div>
-
   </div>
 
   <script>
-    // 1. INTRO OVERLAY LOGIC
     const overlay = document.getElementById('intro-overlay');
     const video = document.getElementById('intro-video');
 
@@ -630,9 +443,8 @@
       }
     }, 6000);
 
-    // 2. SOFT DEPTH-BLUR SCROLL OBSERVER
+    /* Scroll Observer for Card Focus Effect */
     const cards = document.querySelectorAll('.wedding-card');
-    
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -647,7 +459,7 @@
 
     cards.forEach(card => cardObserver.observe(card));
 
-    // 3. DYNAMIC PEARL & EVENT FOCUS CONTROLLER
+    /* Pearl Node Sync Strategy */
     function setupItineraryCard(cardId, pearlId) {
       const card = document.getElementById(cardId);
       const pearl = document.getElementById(pearlId);
@@ -664,7 +476,6 @@
           const rect = item.getBoundingClientRect();
           const itemCenter = rect.top + rect.height / 2;
           const distance = Math.abs(viewportCenter - itemCenter);
-
           if (distance < minDistance) {
             minDistance = distance;
             closestIndex = index;
