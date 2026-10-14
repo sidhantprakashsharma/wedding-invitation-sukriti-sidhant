@@ -41,7 +41,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Intro Overlay & Cover Screen */
     #intro-overlay {
       position: fixed;
       inset: 0;
@@ -163,7 +162,6 @@
       color: var(--wine-deep);
     }
 
-    /* Cards Layout & Frame Safe Padding */
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -179,7 +177,7 @@
       z-index: 2;
       width: 100%;
       max-width: 440px;
-      min-height: 760px;
+      min-height: 740px;
       background-color: var(--card-fallback);
       background-image: url('card_background.jpg');
       background-size: cover;
@@ -191,9 +189,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 130px 60px 140px 60px; /* Safe padding for floral frame */
+      padding: 130px 60px 140px 60px; /* Default frame safe padding for Hero & Blessings cards */
       text-align: center;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Specialized padding and alignment for Cards 2 & 3 to fit timeline inside floral frame */
+    .wedding-card.itinerary-card {
+      padding: 100px 45px 100px 45px;
+      justify-content: space-around;
     }
 
     .wedding-card.in-focus {
@@ -214,6 +218,30 @@
       text-transform: uppercase;
       letter-spacing: 3px;
       color: var(--text-muted);
+    }
+
+    .sub-heading-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .sub-heading-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 2.5px;
+      color: var(--wine-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .sub-heading-day {
+      font-family: 'Marcellus', serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--text-muted);
+      text-transform: uppercase;
     }
 
     .names-title {
@@ -261,22 +289,21 @@
       text-transform: uppercase;
     }
 
-    /* Pearl Timeline Track */
     .itinerary-track {
       position: relative;
       width: 100%;
-      margin: 15px 0;
+      margin: 10px 0;
       display: flex;
       flex-direction: column;
-      gap: 28px;
-      padding-left: 50px;
+      gap: 16px;
+      padding-left: 45px;
     }
 
     .vertical-spine {
       position: absolute;
       left: 18px;
-      top: 15px;
-      bottom: 15px;
+      top: 10px;
+      bottom: 10px;
       width: 1px;
       background: linear-gradient(to bottom, transparent, var(--gold-antique) 10%, var(--gold-antique) 90%, transparent);
     }
@@ -284,7 +311,7 @@
     .pearl-node {
       position: absolute;
       left: 18px;
-      top: 20px;
+      top: 16px;
       transform: translate(-50%, -50%);
       width: 13px;
       height: 13px;
@@ -327,13 +354,13 @@
     .event-item.active {
       opacity: 1;
       filter: blur(0px);
-      transform: scale(1.04);
+      transform: scale(1.02);
     }
 
     .event-dot {
       position: absolute;
-      left: -32px;
-      top: 8px;
+      left: -27px;
+      top: 6px;
       transform: translateX(-50%);
       width: 5px;
       height: 5px;
@@ -344,7 +371,7 @@
 
     .event-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       letter-spacing: 1.5px;
       color: var(--wine-primary);
       font-weight: 600;
@@ -359,24 +386,24 @@
     }
 
     .event-item.active .event-details-box {
-      max-height: 80px;
+      max-height: 65px;
       opacity: 1;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .event-datetime {
       font-family: 'Marcellus', serif;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gold-deep);
       letter-spacing: 1px;
     }
 
     .location-link {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--wine-primary);
       text-decoration: none;
-      margin-top: 3px;
+      margin-top: 2px;
       font-family: 'Marcellus', serif;
       letter-spacing: 0.5px;
       transition: color 0.2s ease;
@@ -389,7 +416,7 @@
   </style>
 </head>
 <body>
-  <!-- INTRO OVERLAY WITH TAP-TO-VIEW COVER SCREEN -->
+
   <div id="intro-overlay">
     <!-- Cover Screen State -->
     <div id="cover-screen" class="cover-screen">
@@ -401,10 +428,10 @@
       <button class="btn-enter" onclick="startVideoExperience()">Tap to View Invitation</button>
     </div>
 
-    <!-- Video Player State (Hidden Initially) -->
+    <!-- Video Player State -->
     <div id="video-wrapper">
       <button class="btn-skip" onclick="closeIntro()">Skip Intro</button>
-      <video id="intro-video" playsinline>
+      <video id="intro-video" playsinline preload="auto">
         <source src="wedding_intro.mp4" type="video/mp4">
       </video>
     </div>
@@ -418,7 +445,7 @@
         <span class="sub-heading">Together with their families</span>
         <div style="margin: 12px 0;">
           <h1 class="names-title">Sukriti</h1>
-          <div class="ampersand">&</div>
+          <div class="ampersand">&amp;</div>
           <h1 class="names-title">Sidhant</h1>
         </div>
         <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
@@ -426,16 +453,18 @@
         </p>
       </div>
       <div>
-        <div class="date-badge">December 02 & 03, 2026</div>
-        <div class="location-text" style="margin-top: 8px;">Lonavala & Khandala</div>
-        <div class="monogram-stamp" style="margin-top: 15px;">— S & S —</div>
+        <div class="date-badge">December 02 &amp; 03, 2026</div>
+        <div class="location-text" style="margin-top: 8px;">Khandala</div>
+        <div class="monogram-stamp" style="margin-top: 15px;">— S &amp; S —</div>
       </div>
     </div>
 
-    <!-- DAY 1 ITINERARY CARD -->
-    <div class="wedding-card out-of-focus" id="cardDay1">
+    <div class="wedding-card itinerary-card out-of-focus" id="cardDay1">
       <div>
-        <span class="sub-heading">Wednesday, December 02, 2026</span>
+        <div class="sub-heading-group">
+          <span class="sub-heading-date">December 02, 2026</span>
+          <span class="sub-heading-day">Wednesday</span>
+        </div>
       </div>
       <div class="itinerary-track">
         <div class="vertical-spine"></div>
@@ -445,17 +474,19 @@
           <div class="event-name">Haldi Mehandi Mandap</div>
           <div class="event-details-box">
             <div class="event-datetime">Wednesday • 2:00 PM</div>
-            <a href="https://maps.google.com/?q=Hotel+Sapphire+Lonavala" target="_blank" class="location-link">Hotel Sapphire, Lonavala ↗</a>
+            <a href="https://maps.google.com/?q=Amoravida+Khandala" target="_blank" class="location-link">Amoravida, Khandala ↗</a>
           </div>
         </div>
       </div>
       <div class="monogram-stamp">DAY I</div>
     </div>
 
-    <!-- DAY 2 ITINERARY CARD -->
-    <div class="wedding-card out-of-focus" id="cardDay2">
+    <div class="wedding-card itinerary-card out-of-focus" id="cardDay2">
       <div>
-        <span class="sub-heading">Thursday, December 03, 2026</span>
+        <div class="sub-heading-group">
+          <span class="sub-heading-date">December 03, 2026</span>
+          <span class="sub-heading-day">Thursday</span>
+        </div>
       </div>
       <div class="itinerary-track">
         <div class="vertical-spine"></div>
@@ -472,7 +503,6 @@
       <div class="monogram-stamp">DAY II</div>
     </div>
 
-    <!-- BLESSINGS / HOST CARD -->
     <div class="wedding-card out-of-focus">
       <div></div>
       <div>
@@ -483,8 +513,8 @@
         <div>
           <span class="sub-heading">Warmly Invited By:</span>
           <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--wine-primary); margin-top: 8px; font-weight: 600; line-height: 1.4;">
-            Kanchan Devi<br>
-            Sangita & Sunil Kumar Shukla
+            Kanchan Shukla<br>
+            Sangita &amp; Sunil Kumar Shukla
           </h3>
         </div>
       </div>
@@ -505,7 +535,10 @@
       if (videoWrapper) videoWrapper.style.display = 'block';
       if (video) {
         video.muted = false;
-        video.play().catch(e => console.log('Playback error:', e));
+        video.play().catch(e => {
+          console.log('Playback error:', e);
+          closeIntro();
+        });
       }
     }
 
@@ -514,12 +547,21 @@
       if (video) video.pause();
     }
 
+    /* Video Stability Event Handlers */
     if (video) {
       video.addEventListener('ended', closeIntro);
       video.addEventListener('error', closeIntro);
+      video.addEventListener('stalled', closeIntro);
+      video.addEventListener('waiting', () => {
+        setTimeout(() => {
+          if (video.readyState < 3 && videoWrapper.style.display === 'block') {
+            closeIntro();
+          }
+        }, 3500);
+      });
     }
 
-    /* Scroll Observer for Card Focus Effect */
+    /* Scroll Observer for Card Focus Animation */
     const cards = document.querySelectorAll('.wedding-card');
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -535,7 +577,7 @@
 
     cards.forEach(card => cardObserver.observe(card));
 
-    /* Pearl Node Sync Strategy */
+    /* Pearl Node Sync Logic */
     function setupItineraryCard(cardId, pearlId) {
       const card = document.getElementById(cardId);
       const pearl = document.getElementById(pearlId);
