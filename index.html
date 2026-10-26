@@ -1,10 +1,16 @@
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wedding Invitation | Sukriti & Sidhant</title>
+
+  <!-- Open Graph Meta Tags for WhatsApp & Social Media Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Wedding Invitation | Sukriti &amp; Sidhant">
+  <meta property="og:description" content="December 02 &amp; 03, 2026 • Amoravida, Khandala. Join us to celebrate our wedding.">
+  <meta property="og:image" content="https://your-domain.com/card_background.jpg">
+  <meta property="og:url" content="https://your-domain.com">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,7 +173,7 @@ html
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 155px 60px 125px 60px; /* Adjusted top padding to move text cleanly below the floral border */
+      padding: 155px 60px 125px 60px; /* Adjusted top padding */
       text-align: center;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -395,6 +401,11 @@ html
 </head>
 <body>
 
+  <!-- Background Music Audio Tag -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="wedding_music.mp3" type="audio/mpeg">
+  </audio>
+
   <div id="intro-overlay">
     <!-- Cover Screen State -->
     <div id="cover-screen" class="cover-screen">
@@ -408,7 +419,7 @@ html
 
     <!-- Video Player State -->
     <div id="video-wrapper">
-      <video id="intro-video" playsinline preload="auto">
+      <video id="intro-video" playsinline preload="auto" muted>
         <source src="wedding_intro.mp4" type="video/mp4">
       </video>
     </div>
@@ -508,14 +519,23 @@ html
     const coverScreen = document.getElementById('cover-screen');
     const videoWrapper = document.getElementById('video-wrapper');
     const video = document.getElementById('intro-video');
+    const bgMusic = document.getElementById('bg-music');
+
+    let isExperienceStarted = false;
 
     function startVideoExperience() {
+      isExperienceStarted = true;
       if (coverScreen) coverScreen.style.display = 'none';
       if (videoWrapper) videoWrapper.style.display = 'block';
+
+      if (bgMusic) {
+        bgMusic.play().catch(e => console.log('Audio playback error:', e));
+      }
+
       if (video) {
-        video.muted = false;
+        video.muted = true;
         video.play().catch(e => {
-          console.log('Playback error:', e);
+          console.log('Video playback error:', e);
           closeIntro();
         });
       }
@@ -525,6 +545,21 @@ html
       if (overlay) overlay.classList.add('hidden');
       if (video) video.pause();
     }
+
+    /* Tab Switch Auto-Pause Logic */
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (bgMusic) bgMusic.pause();
+        if (video && !overlay.classList.contains('hidden')) video.pause();
+      } else {
+        if (isExperienceStarted && bgMusic) {
+          bgMusic.play().catch(e => console.log('Resume audio error:', e));
+        }
+        if (video && videoWrapper.style.display === 'block' && !overlay.classList.contains('hidden')) {
+          video.play().catch(e => console.log('Resume video error:', e));
+        }
+      }
+    });
 
     /* Video Stability Event Handlers */
     if (video) {
