@@ -139,29 +139,6 @@
       object-fit: contain;
     }
 
-    .btn-skip {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border: 1px solid var(--gold-antique);
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-family: 'Marcellus', serif;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      z-index: 10001;
-      backdrop-filter: blur(4px);
-      transition: background 0.3s ease;
-    }
-
-    .btn-skip:hover {
-      background: var(--gold-antique);
-      color: var(--wine-deep);
-    }
-
     .cards-wrapper {
       position: relative;
       width: 100%;
@@ -430,7 +407,6 @@
 
     <!-- Video Player State -->
     <div id="video-wrapper">
-      <button class="btn-skip" onclick="closeIntro()">Skip Intro</button>
       <video id="intro-video" playsinline preload="auto">
         <source src="wedding_intro.mp4" type="video/mp4">
       </video>
@@ -444,11 +420,13 @@
       <div>
         <span class="sub-heading">Together with their families</span>
         <div style="margin: 12px 0;">
-          <h1 class="names-title">Sukriti</h1>
+          <h1 class="names-title" style="margin-bottom: 0;">Sukriti</h1>
+          <div style="font-family: 'Marcellus', serif; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; margin-bottom: 6px;">d/o Sangita &amp; Sunil Kumar Shukla</div>
           <div class="ampersand">&amp;</div>
-          <h1 class="names-title">Sidhant</h1>
+          <h1 class="names-title" style="margin-top: 2px; margin-bottom: 0;">Sidhant</h1>
+          <div style="font-family: 'Marcellus', serif; font-size: 0.72rem; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-top: 2px;">s/o Sadhana &amp; Om Prakash Sharma</div>
         </div>
-        <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark);">
+        <p style="font-style: italic; font-size: 0.95rem; color: var(--text-dark); margin-top: 10px;">
           request the honor of your presence to celebrate their wedding
         </p>
       </div>
@@ -618,7 +596,7 @@
 
       window.addEventListener('scroll', syncPearlOnScroll, { passive: true });
       window.addEventListener('resize', syncPearlOnScroll);
-      
+
       items.forEach((item) => {
         item.addEventListener('click', () => {
           item.scrollIntoView({ behavior: 'smooth', block: 'center' });
