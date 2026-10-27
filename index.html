@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -407,36 +408,31 @@
       text-decoration: underline;
     }
 
-    /* Contact Links Styling */
-    .contact-section {
-      margin-top: 15px;
+    /* Seamless Natural Typography Contact Styling */
+    .contact-seamless-group {
+      margin-top: 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .contact-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.82rem;
-      letter-spacing: 1.5px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
       color: var(--wine-primary);
       text-decoration: none;
       font-weight: 600;
-      padding: 4px 12px;
-      border: 1px solid rgba(197, 158, 82, 0.4);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
+      transition: color 0.2s ease;
     }
 
     .contact-link:hover {
-      background: var(--gold-antique);
-      color: var(--wine-deep);
-      border-color: var(--gold-antique);
+      color: var(--gold-deep);
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -490,6 +486,7 @@
       </div>
     </div>
 
+    <!-- DAY 1 ITINERARY CARD -->
     <div class="wedding-card itinerary-card out-of-focus" id="cardDay1">
       <div>
         <div class="sub-heading-group">
@@ -512,6 +509,7 @@
       <div class="monogram-stamp">DAY I</div>
     </div>
 
+    <!-- DAY 2 ITINERARY CARD -->
     <div class="wedding-card itinerary-card out-of-focus" id="cardDay2">
       <div>
         <div class="sub-heading-group">
@@ -534,29 +532,29 @@
       <div class="monogram-stamp">DAY II</div>
     </div>
 
-    <!-- FINAL CARD WITH CONTACTS -->
+    <!-- FINAL CARD WITH SEAMLESS CONTACT SECTION -->
     <div class="wedding-card out-of-focus">
       <div></div>
       <div>
         <p style="font-size: 1.1rem; color: var(--wine-primary); line-height: 1.5; font-style: italic; padding: 0 5px;">
           "We seek your gracious presence, prayers, and blessings as we embark on this sacred new chapter."
         </p>
-        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 20px auto;"></div>
+        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 18px auto;"></div>
         <div>
           <span class="sub-heading">Warmly Invited By:</span>
-          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--wine-primary); margin-top: 6px; font-weight: 600; line-height: 1.4;">
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--wine-primary); margin-top: 5px; font-weight: 600; line-height: 1.4;">
             Kanchan Shukla<br>
             Sangita &amp; Sunil Kumar Shukla
           </h3>
         </div>
 
-        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 20px auto 12px auto;"></div>
+        <div style="width: 40px; height: 1px; background: var(--gold-antique); margin: 16px auto 10px auto;"></div>
 
         <div>
-          <span class="sub-heading">RSVP / Contact Us:</span>
-          <div class="contact-section">
-            <a href="tel:+919262307005" class="contact-link">📞 +91 9262307005</a>
-            <a href="tel:+917765991227" class="contact-link">📞 +91 7765991227</a>
+          <span class="sub-heading">RSVP / Contact Us</span>
+          <div class="contact-seamless-group">
+            <a href="tel:+919262307005" class="contact-link">+91 9262307005</a>
+            <a href="tel:+917765991227" class="contact-link">+91 7765991227</a>
           </div>
         </div>
       </div>
@@ -585,7 +583,7 @@
       }
 
       if (video) {
-        video.muted = false; // Unmuted so it plays with sound upon click
+        video.muted = false;
         video.play().catch(e => {
           console.log('Video playback error:', e);
           closeIntro();
